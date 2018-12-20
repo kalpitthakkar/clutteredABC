@@ -1,0 +1,10 @@
+imagePath,category,corrAns
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix1_24_1.png,YES,right
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix2_32_3.png,NO,left
+/media/ext_disk1/Kalpit/cluttered_nist/train/baseline_2_352.png,NO,left
+/media/ext_disk1/Kalpit/cluttered_nist/train/baseline_2_131.png,YES,right
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix1_6_3.png,NO,left
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix1_46_94.png,YES,right
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix2_17_259.png,YES,right
+/media/ext_disk1/Kalpit/cluttered_nist/train/baseline_49_6.png,NO,left
+/media/ext_disk1/Kalpit/cluttered_nist/train/ix2_40_121.png,YES,right
