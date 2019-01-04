@@ -10,17 +10,16 @@ timeline.push(welcome);
 
 var instructions = {
 	type: "html-keyboard-response",
-	stimulus: "<p>In this experiment, a circle will appear in the center " +
-	"of the screen.</p><p>If the circle is <strong>blue</strong>, " +
-	"press the letter F on the keyboard as fast as you can.</p>" +
-	"<p>If the circle is <strong>orange</strong>, press the letter J " +
-	"as fast as you can.</p>" +
-	"<div style='width: 700px;'>"+
-	"<div style='float: left;'><img src='img/blue.png' style='width: 50px; height: 50px'></img>" +
-	"<p class='small'><strong>Press the F key</strong></p></div>" +
-	"<div class='float: right;'><img src='img/orange.png' style='width: 50px; height: 50px'></img>" +
-	"<p class='small'><strong>Press the J key</strong></p></div>" +
-	"</div>"+
+	stimulus: "<p>In this experiment, you will be shown a series of alphabet images " +
+	"at the centre of the screen. Each image contains two randomly chosen alphabets. There " +
+    "are two circles drawn in the image, on the alphabets. They can lie either on the same " +
+    "alphabet or on two separate alphabets.</p> <p>If the circles lie on <strong>same</strong> " +
+    "alphabet, press the letter <strong>y</strong> on the keyboard, otherwise press <strong>n</strong>. " + 
+    "Try to keep the response times as minimal as possible.</p>" +
+    "<p>The entire experiment in divided into two stages: train and test. Training has one set, consisting of " +
+    "<strong>nine</strong> images. In this stage, you will be provided with feedback as to whether your response " +
+    "was correct or incorrect. For the test stage, you will be presented with five sets, each consisting of " +
+    "<strong>thirty</strong> images. You will be given a rest period between each set." +
 	"<p>Press any key to begin.</p>",
 	post_trial_gap: 2000
 };
@@ -263,45 +262,72 @@ var test_split1_procedure = {
 	timeline_variables: split1_stimuli,
 	randomize_order: true,
 }
-timeline.push(test_split1_procedure);
-timeline.push(rest);
+//timeline.push(test_split1_procedure);
+//timeline.push(rest);
 
 var test_split2_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split2_stimuli,
 	randomize_order: true,
 }
-timeline.push(test_split2_procedure);
-timeline.push(rest);
+//timeline.push(test_split2_procedure);
+//timeline.push(rest);
 
 var test_split3_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split3_stimuli,
 	randomize_order: true,
 }
-timeline.push(test_split3_procedure);
-timeline.push(rest);
+//timeline.push(test_split3_procedure);
+//timeline.push(rest);
 
 var test_split4_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split4_stimuli,
 	randomize_order: true,
 }
-timeline.push(test_split4_procedure);
-timeline.push(rest);
+//timeline.push(test_split4_procedure);
+//timeline.push(rest);
 
 var test_split5_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split5_stimuli,
 	randomize_order: true,
 }
-timeline.push(test_split5_procedure);
+//timeline.push(test_split5_procedure);
 timeline.push(thanks);
+
+var subject_id = jsPsych.randomization.randomID(15);
+var basename = "experiment_data-"
+var save_filename = basename.concat(subject_id);
+jsPsych.data.addProperties({
+	SubjectID: save_filename
+})
+
+function saveData(name, data, subid) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', './write_data.php'); // 'write_data.php' is the path to the php file described above.
+	xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.success);
+            alert(response.success);
+        }
+        else {
+            alert("There is some error in accessing files");
+        }
+    };
+	xhr.send(JSON.stringify({filename: name, filedata: data, SubjectID: subid}));
+}
 
 /* start the experiment */
 jsPsych.init({
 	timeline: timeline,
 	on_finish: function() {
-		jsPsych.data.displayData();
+		// call the saveData function after the experiment is over
+        // jsPsych.data.displayData();
+        // jsPsych.data.get().localSave('csv', save_filename.concat('.csv'));
+		saveData(save_filename, jsPsych.data.get().csv(), subject_id);
 	}
 });
