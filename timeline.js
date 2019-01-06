@@ -21,7 +21,6 @@ var instructions = {
     "was correct or incorrect. For the test stage, you will be presented with five sets, each consisting of " +
     "<strong>thirty</strong> images. You will be given a rest period between each set." +
 	"<p>Press any key to begin.</p>",
-	post_trial_gap: 2000
 };
 timeline.push(instructions);
 
@@ -214,16 +213,16 @@ var fixation = {
 
 var rest = {
 	type: 'html-keyboard-response',
-	stimulus: '<div style="font-size:60px;"> REST. Press any key to begin next stage </div>',
+	stimulus: '<div style="font-size:30px;"> <p> REST. Press any key to begin next stage </p> </div>',
 	data: { part: 'rest' }
 }
 
 var thanks = {
 	type: 'html-keyboard-response',
-	stimulus: '<div style="font-size:60px;"> The trials are now complete. Thank you very much for you time. ' +
-			'We greatly appreciate it. </div>',
+	stimulus: '<div style="font-size:30px;"> <p> The trials are now complete. Thank you very much for you time. ' +
+			'We greatly appreciate it. </p> </div>',
 	choices: jsPsych.NO_KEYS,
-	trial_duration: 10000,
+	trial_duration: 2000,
 	data: { part: 'thanks' }
 }
 
@@ -235,7 +234,8 @@ var train = {
 	key_answer: jsPsych.timelineVariable('correct_key'),
 	correct_text: "<p class='prompt'> Correct response! </p>",
 	incorrect_text: "<p class='prompt'> Incorrect response! </p>",
-	prompt: "<p> Are the two circles on the same letter? Respond (y)es or (n)o: </p>"
+	feedback_duration: 1000,
+    prompt: "<p> Are the two circles on the same letter? Respond (y)es or (n)o: </p>"
 }
 
 var test = {
@@ -246,7 +246,8 @@ var test = {
 	key_answer: jsPsych.timelineVariable('correct_key'),
 	correct_text: "<p class='prompt'> Are the two circles on the same letter? Respond (y)es or (n)o: </p>",
 	incorrect_text: "<p class='prompt'> Are the two circles on the same letter? Respond (y)es or (n)o: </p>",
-	prompt: "<p> Are the two circles on the same letter? Respond (y)es or (n)o: </p>"
+	feedback_duration: 0,
+    prompt: "<p> Are the two circles on the same letter? Respond (y)es or (n)o: </p>"
 }
 
 var train_procedure = {
@@ -262,39 +263,39 @@ var test_split1_procedure = {
 	timeline_variables: split1_stimuli,
 	randomize_order: true,
 }
-//timeline.push(test_split1_procedure);
-//timeline.push(rest);
+timeline.push(test_split1_procedure);
+timeline.push(rest);
 
 var test_split2_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split2_stimuli,
 	randomize_order: true,
 }
-//timeline.push(test_split2_procedure);
-//timeline.push(rest);
+timeline.push(test_split2_procedure);
+timeline.push(rest);
 
 var test_split3_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split3_stimuli,
 	randomize_order: true,
 }
-//timeline.push(test_split3_procedure);
-//timeline.push(rest);
+timeline.push(test_split3_procedure);
+timeline.push(rest);
 
 var test_split4_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split4_stimuli,
 	randomize_order: true,
 }
-//timeline.push(test_split4_procedure);
-//timeline.push(rest);
+timeline.push(test_split4_procedure);
+timeline.push(rest);
 
 var test_split5_procedure = {
 	timeline: [fixation, test],
 	timeline_variables: split5_stimuli,
 	randomize_order: true,
 }
-//timeline.push(test_split5_procedure);
+timeline.push(test_split5_procedure);
 timeline.push(thanks);
 
 var subject_id = jsPsych.randomization.randomID(15);
