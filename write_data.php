@@ -37,6 +37,8 @@ try {
   $insertstmt->bindValue(":$subjectid", $data_array[$subjectid]);
   $responsefile = $col_names[1];
   $insertstmt->bindValue(":$responsefile", $filepath);
+  $timestamp = date("Y-m-d H:i:s");
+  $insertstmt->bindValue(":$col_names[2]", $timestamp);
   $insertstmt->execute();
   echo '{"success": true}';
 } catch(PDOException $e) {
