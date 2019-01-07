@@ -42,13 +42,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Prepare data for JSPsych Experiments')
     parser.add_argument('-d', '--data', type=str, help='Path to the root directory of dataset, which contains \
             the different split directories (e.g.: baseline, ix1, ix2) with sample images and metadata, respectively')
-    parser.add_argument('-sp', '--splits', nargs='*', default=['baseline', 'ix1', 'ix2'], help='Which splits to use to \
+    parser.add_argument('-sp', '--splits', nargs='*', default=['baseline-', 'ix1-', 'ix2'], help='Which splits to use to \
             form the dataset for experiments')
     parser.add_argument('-n', '--num-samples', type=int, help='Number of random samples to draw from the given \
             set of images using the metadata to balance classes (should be divisible by number of classes), \
             from each of the splits')
     parser.add_argument('-pd', '--project-dir', type=str, help='Path to the root directory of the JSPsych project directory \
             where the samples will be stored in subdirectories splitN (N=1..nsplits)')
+    parser.add_argument('--train', action='store_true', help='Whether the present split is training split or not')
 
     args = parser.parse_args()
 
@@ -67,17 +68,30 @@ if __name__ == '__main__':
             final_pos.extend(list(pos_samples))
             final_neg.extend(list(neg_samples))
 
-    samples, labels = generate_random_splits(final_pos, final_neg, all_sam_to_lab)
+    if args.train:
+        samples, labels = generate_random_splits(final_pos, final_neg, all_sam_to_lab, n_splits=1)
+    else:
+        samples, labels = generate_random_splits(final_pos, final_neg, all_sam_to_lab)
 
-    from shutil import copy
-    for i, sam_list in enumerate(samples):
-        splitpath = os.path.join(args.project_dir, 'img', 'split'+str(i+1))
-        if not os.path.exists(splitpath):
-            os.makedirs(splitpath)
+    if args.project_dir:
+        from shutil import copy
+        for i, sam_list in enumerate(samples):
+            if not args.train:
+                splitpath = os.path.join(args.project_dir, 'img', 'split'+str(i+1))
+                if not os.path.exists(splitpath):
+                    os.makedirs(splitpath)
+            else:
+                splitpath = os.path.join(args.project_dir, 'img', 'train')
+                if not os.path.exists(splitpath):
+                    os.makedirs(splitpath)
 
-        for sam in sam_list:
-            fname = '_'.join(sam.split('/')[-4:])
-            newpath = os.path.join(splitpath, fname)
-            copy(sam, newpath)
+            for sam in sam_list:
+                fname = '_'.join(sam.split('/')[-4:])
+                newpath = os.path.join(splitpath, fname)
+                copy(sam, newpath)
 
-        print "Split "+str(i+1)+" processed and copied to project directory"
+            if not args.train:
+                print "Split "+str(i+1)+" processed and copied to project directory"
+            else:
+                print "Train examples processed and copied to project directory"
+

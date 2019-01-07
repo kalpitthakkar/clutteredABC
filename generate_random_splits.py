@@ -28,7 +28,7 @@ def generate_random_splits(pos_samples, neg_samples, map_sam_to_lab, n_splits=5)
         fn.write('Samples:'+'\n')
         for sam in sams:
             lab = map_sam_to_lab[sam]
-            fn.write("{ stimulus: 'img/split"+str(i+1)+"/"+'_'.join(sam.split('/')[-4:])+"', data: { part: 'split"+str(i+1)+"', correct_response: '"+map_sam_to_lab[sam]+"'}, correct_key: %d }\n" % (78 if lab == 'no' else 89))
+            fn.write("{ stimulus: 'img/split"+str(i+1)+"/"+'_'.join(sam.split('/')[-4:])+"', data: { part: 'split"+str(i+1)+"', correct_response: '"+map_sam_to_lab[sam]+"'}, correct_key: %d },\n" % (189 if lab == 'no' else 187))
             labs.append(lab)
         labs = np.asarray(labs)
         split_samples.append(sams)
