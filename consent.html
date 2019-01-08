@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- 
+  The consent.html displays the text of your IRB-approved
+  consent form.  Even if you are not required to provide
+  a consent form, it is helpful to use this form to 
+  describe what people can do if an error comes up, etc...
+
+-->
+<html>
+    <head>
+        <title>Psychology Experiment - Informed Consent Form</title>
+        <link rel=stylesheet href="./jspsych-6.0.5/css/bootstrap.min.css" type="text/css">
+        <link rel=stylesheet href="./jspsych-6.0.5/css/style.css" type="text/css">
+        <script type="text/javascript">
+            function onexit() {
+              self.close(); // no harm, no foul here
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container-consent">
+            <div id="consent">
+                <h1>We need your consent to proceed</h1>
+                <hr>
+                <div class="legal well">
+<p><strong> Purpose of the research: </strong> You are being asked to participate in a voluntary Brown University research study to measure human performance in visual recognition tasks. In this experiment, we seek to gain a basic understanding of how the visual system rapidly interprets and organizes visual scenes.
+
+<p><strong> Inclusion criteria: </strong> You must be 18 years or older to participate in this experiment. You must have normal or corrected-to-normal vision.
+
+<p><strong> Behavioral Procedures: </strong> The task involves viewing images containing two objects and two circles, and classifying them according to a novel task which will be explained on the next page.
+    
+<p><strong> Time required: </strong> less than 10 minutes.
+
+<p><strong> Benefits: </strong> Although there are no direct benefits for the participants in the current study, results may improve our knowledge of the how the brain processes visual objects and scenes.
+
+<p><strong> <em> Compensation: You must complete the entire experiment to receive compensation for your participation. </em> </strong>
+
+<p><strong> Participant Risks: </strong> There are no anticipated risks for the participants in the current study.
+
+<p><strong> Confidentiality: </strong> Your participation in this study is confidential. By signing this document, you permit us to use anonymized information for scientific purposes including teaching and/or publication.
+
+<p><strong> Participation and Withdrawal: </strong> You do not have to participate, and you are free to withdraw at any time during the course of the study by closing the browser.
+
+<p> <strong> Contact: </strong> If you have questions or concerns about this research, please contact
+
+<p> Thomas Serre
+<br>
+Associate Professor
+<br>
+Department of Cognitive, Linguistic & Psychological Sciences
+<br>
+PO Box 1820, Brown University
+<br>
+Providence, RI 02912
+<br>
+<tt>serre.lab@gmail.com</tt>
+
+<p> Who to contact about your rights in this research, for questions, concerns, suggestions, or complaints that are not being addressed by the researcher, or research-related harm:    
+<p>
+Brown University Human Research Protection Program
+<br>
+Box 1986
+<br>
+Brown University
+<br>
+tel: (401) 863-3050
+<br>
+toll-free: (866) 309-2095
+<br>
+
+</p>
+
+By clicking 'I agree' below indicates that you have understood the information about the experiment and consent to your participation. The participation is voluntary and you may refuse to answer certain questions on the questionnaire and withdraw from the study at any time with no penalty. This does not waive your legal rights. You can print a copy of the consent form or save this browser window for your own record. If you have further questions related to this research, please contact the researcher.
+                    </p>
+
+                    <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+                    <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                    </button>
+                </div>
+
+                <hr>
+                <h4>Do you understand and consent to these terms?</h4>
+                <br>
+
+                <center>
+                    <button id="agree" type="button" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-ok"></span> I agree 
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="disagree" type="button" class="btn btn-danger btn-lg" onClick="onexit()">
+                    <span class="glyphicon glyphicon-ban-circle"></span> No thanks, I do not want to do this HIT
+                    </button>
+                </center>
+
+            </div>
+        </div>
+    </body>
+</html>

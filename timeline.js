@@ -8,14 +8,21 @@ var welcome = {
 };
 timeline.push(welcome);
 
+var consent = {
+	type: 'external-html',
+	url: 'http://f4be9f9a.ngrok.io/consent.html',
+	cont_btn: 'agree'
+}
+timeline.push(consent);
+
 var instructions = {
 	type: "html-keyboard-response",
 	stimulus: "<p> You will make decisions about a series of images. Each image has two letters and two circles. " +
     "Your task is to decide whether the two circles are on the <strong>same</strong> or <strong>different</strong> letters.</p>" +
-    "<p>If the circles are on the same letter, press <strong>+</strong>. If the circles are on a different letter, press <strong>-</strong>. " +
-	"(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>). " +
-	"Do your best to respond as quickly as possible.</p>" +
-    "<p>The experiment in split into two phases. You will first complete a practice session, consisting of nine images, in which you will get " +
+    "<p>If the circles are on the same letter, press <strong>+</strong>. If the circles are on a different letter, press <strong>-</strong>.</p>" +
+	"<p>(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>).</p>" +
+	"<p><strong> Do your best to respond as quickly as possible.</strong></p>" +
+    "<p>The experiment is split into two phases. You will first complete a practice session, consisting of nine images, in which you will get " +
     "feedback on your performance. Next, you will complete the main experiment, where you will not get any feedback. The main experiment has " +
     "150 images, split into 5 blocks. You will get a chance to rest between each block.</p>" +
 	"<p>Press any key to begin.</p>",
@@ -204,6 +211,13 @@ var split5_stimuli = [
 	{ stimulus: 'img/split5/baseline-_imgs_12_sample_1877.png', data: { part: 'split5', correct_response: 'no'}, correct_key: 189 },
 ];
 
+var subject_id = jsPsych.randomization.randomID(15);
+var basename = "experiment_data-"
+var save_filename = basename.concat(subject_id);
+jsPsych.data.addProperties({
+	SubjectID: save_filename
+})
+
 var fixation = {
 	type: 'html-keyboard-response',
 	stimulus: '<div style="font-size:60px;">+</div>',
@@ -224,7 +238,19 @@ var thanks = {
 			'We greatly appreciate it. </p> </div>',
 	choices: jsPsych.NO_KEYS,
 	trial_duration: 2000,
-	data: { part: 'thanks' }
+	data: { part: 'thanks' },
+	on_finish: function() {
+		// call the saveData function after the experiment is over
+		var raw_data = jsPsych.data.get().values()[0];
+		console.log(raw_data.workerid);
+		var workerid = raw_data.workerid;
+		var assignmentid = raw_data.assignmentid;
+		var hitid = raw_data.hitid;
+		var turksub = raw_data.turksubmit;
+		// jsPsych.data.displayData();
+        // jsPsych.data.get().localSave('csv', save_filename.concat('.csv'));
+		saveData(save_filename, jsPsych.data.get().csv(), subject_id, workerid, assignmentid, hitid, turksub);
+	}
 }
 
 var train = {
@@ -299,14 +325,18 @@ var test_split5_procedure = {
 timeline.push(test_split5_procedure);
 timeline.push(thanks);
 
-var subject_id = jsPsych.randomization.randomID(15);
-var basename = "experiment_data-"
-var save_filename = basename.concat(subject_id);
-jsPsych.data.addProperties({
-	SubjectID: save_filename
-})
+var pastecode = {
+	type: 'html-keyboard-response',
+	stimulus: '<div style="font-size:20px;"> <p> <strong> Your unique code: </strong> ' + subject_id +
+			'</p> Paste this on the Mechanical Turk page and press Submit to complete the experiment. ' +
+			'Once you are done submitting, you can safely close this tab. </p> </div>',
+	choices: [13],
+	data: { part: 'code' }
+}
 
-function saveData(name, data, subid) {
+timeline.push(pastecode);
+
+function saveData(name, data, subid, workid, assignid, hitid, turksub) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', './write_data.php'); // 'write_data.php' is the path to the php file described above.
 	xhr.setRequestHeader('Content-Type', 'application/json');
@@ -314,22 +344,18 @@ function saveData(name, data, subid) {
         if (xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
             console.log(response.success);
-            alert(response.success);
+            //alert(response.success);
         }
         else {
-            alert("There is some error in accessing files");
+			console.log("There is some error in accessing files");
+			//alert("There is some error in accessing files");
         }
     };
-	xhr.send(JSON.stringify({filename: name, filedata: data, SubjectID: subid}));
+	xhr.send(JSON.stringify({filename: name, filedata: data, SubjectID: subid, 
+		workerId: workid, assignId: assignid, hitId: hitid, turksub: turksub}));
 }
 
 /* start the experiment */
 jsPsych.init({
 	timeline: timeline,
-	on_finish: function() {
-		// call the saveData function after the experiment is over
-        // jsPsych.data.displayData();
-        // jsPsych.data.get().localSave('csv', save_filename.concat('.csv'));
-		saveData(save_filename, jsPsych.data.get().csv(), subject_id);
-	}
 });

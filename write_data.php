@@ -39,6 +39,10 @@ try {
   $insertstmt->bindValue(":$responsefile", $filepath);
   $timestamp = date("Y-m-d H:i:s");
   $insertstmt->bindValue(":$col_names[2]", $timestamp);
+  $insertstmt->bindValue(":$col_names[3]", $data_array["hitId"]);
+  $insertstmt->bindValue(":$col_names[4]", $data_array["workerId"]);
+  $insertstmt->bindValue(":$col_names[5]", $data_array["assignId"]);
+  $insertstmt->bindValue(":$col_names[6]", $data_array["turksub"]);
   $insertstmt->execute();
   echo '{"success": true}';
 } catch(PDOException $e) {

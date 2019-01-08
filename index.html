@@ -6,9 +6,43 @@
     <script src="./jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js" type="text/javascript"></script>
     <script src="./jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js" type="text/javascript"></script>
     <script src="./jspsych-6.0.5/plugins/jspsych-categorize-image.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-external-html.js" type="text/javascript"></script>
     <link href="./jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
   </head>
   <body>
     <script src="./timeline.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+      /* Functions to obtain the GET parameters given through RESTful request */
+      function getSearchParameters() {
+        var prmstr = window.location.search.substr(1);
+        return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+      }
+      function transformToAssocArray(prmstr) {
+        var params = {};
+        params['reqstr'] = prmstr;
+        var prmarr = prmstr.split("&");
+        for(var i = 0; i < prmarr.length; i++) {
+          var tmparr = prmarr[i].split("=");
+          params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+      }
+
+      var params = getSearchParameters();
+      console.log(params);
+      var workerId = params.workerId;
+      var hitId = params.hitId;
+      var assignmentId = params.assignmentId;
+      var turkSubmitTo = params.turkSubmitTo;
+
+      jsPsych.data.addProperties({
+        workerid: workerId,
+        hitid: hitId,
+        assignmentid: assignmentId,
+        turksubmit: turkSubmitTo,
+        request: params.reqstr,
+      });
+    </script>
   </body>
 </html>
