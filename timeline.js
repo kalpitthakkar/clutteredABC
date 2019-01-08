@@ -22,7 +22,7 @@ var instructions = {
     "<p>If the circles are on the same letter, press <strong>+</strong>. If the circles are on a different letter, press <strong>-</strong>.</p>" +
 	"<p>(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>).</p>" +
 	"<p><strong> Do your best to respond as quickly as possible.</strong></p>" +
-    "<p>The experiment is split into two phases. You will first complete a practice session, consisting of nine images, in which you will get " +
+    "<p>The experiment is split into two phases. You will first complete a practice session, consisting of twelve images, in which you will get " +
     "feedback on your performance. Next, you will complete the main experiment, where you will not get any feedback. The main experiment has " +
     "150 images, split into 5 blocks. You will get a chance to rest between each block.</p>" +
 	"<p>Press any key to begin.</p>",
@@ -226,16 +226,41 @@ var fixation = {
 	data: { part: 'fixation' }
 }
 
-var rest = {
+var rest1 = {
 	type: 'html-keyboard-response',
-	stimulus: '<div style="font-size:30px;"> <p> REST. Press any key to begin next stage </p> </div>',
+	stimulus: '<div style="font-size:30px;"> <p> Practice session is now complete.</p>You will now begin the main experiment. There are 5 phases, each with 30 images. ' +
+        'You will have a chance to REST between two phases.</p> <p>Press any key to begin the main experiment </p> </div>',
+	data: { part: 'rest' }
+}
+
+var rest2 = {
+	type: 'html-keyboard-response',
+	stimulus: '<div style="font-size:30px;"> <p> Main experiment - split 1 is now complete. Press any key to begin next split </p> </div>',
+	data: { part: 'rest' }
+}
+
+var rest3 = {
+	type: 'html-keyboard-response',
+	stimulus: '<div style="font-size:30px;"> <p> Main experiment - split 2 is now complete. Press any key to begin next split </p> </div>',
+	data: { part: 'rest' }
+}
+
+var rest4 = {
+	type: 'html-keyboard-response',
+	stimulus: '<div style="font-size:30px;"> <p> Main experiment - split 3 is now complete. Press any key to begin next split </p> </div>',
+	data: { part: 'rest' }
+}
+
+var rest5 = {
+	type: 'html-keyboard-response',
+	stimulus: '<div style="font-size:30px;"> <p> Main experiment - split 4 is now complete. Press any key to begin next split </p> </div>',
 	data: { part: 'rest' }
 }
 
 var thanks = {
 	type: 'html-keyboard-response',
-	stimulus: '<div style="font-size:30px;"> <p> The trials are now complete. Thank you very much for you time. ' +
-			'We greatly appreciate it. </p> </div>',
+	stimulus: '<div style="font-size:30px;"> <p> The entire experiment is now complete. Thank you very much for you time. </p>' +
+			'<p> You will now see a page with your unique code. Make sure to copy it and paste it on your mechanical turk page. </p> </div>',
 	choices: jsPsych.NO_KEYS,
 	trial_duration: 2000,
 	data: { part: 'thanks' },
@@ -283,7 +308,7 @@ var train_procedure = {
 	randomize_order: false,
 }
 timeline.push(train_procedure);
-timeline.push(rest);
+timeline.push(rest1);
 
 var test_split1_procedure = {
 	timeline: [fixation, test],
@@ -291,7 +316,7 @@ var test_split1_procedure = {
 	randomize_order: true,
 }
 timeline.push(test_split1_procedure);
-timeline.push(rest);
+timeline.push(rest2);
 
 var test_split2_procedure = {
 	timeline: [fixation, test],
@@ -299,7 +324,7 @@ var test_split2_procedure = {
 	randomize_order: true,
 }
 timeline.push(test_split2_procedure);
-timeline.push(rest);
+timeline.push(rest3);
 
 var test_split3_procedure = {
 	timeline: [fixation, test],
@@ -307,7 +332,7 @@ var test_split3_procedure = {
 	randomize_order: true,
 }
 timeline.push(test_split3_procedure);
-timeline.push(rest);
+timeline.push(rest4);
 
 var test_split4_procedure = {
 	timeline: [fixation, test],
@@ -315,7 +340,7 @@ var test_split4_procedure = {
 	randomize_order: true,
 }
 timeline.push(test_split4_procedure);
-timeline.push(rest);
+timeline.push(rest5);
 
 var test_split5_procedure = {
 	timeline: [fixation, test],
