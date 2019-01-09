@@ -19,7 +19,7 @@ var instructions = {
 	type: "html-keyboard-response",
 	stimulus: "<p> You will make decisions about a series of images. Each image has two letters and two circles. " +
     "Your task is to decide whether the two circles are on the <strong>same</strong> or <strong>different</strong> letters.</p>" +
-    "<p>If the circles are on the same letter, press <strong>+</strong>. If the circles are on a different letter, press <strong>-</strong>.</p>" +
+    "<p>If the circles are on the same letter, press <strong>+</strong>. If the circles are on different letters, press <strong>-</strong>.</p>" +
 	"<p>(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>).</p>" +
 	"<p><strong> Do your best to respond as quickly as possible.</strong></p>" +
     "<p>The experiment is split into two phases. You will first complete a practice session, consisting of twelve images, in which you will get " +
