@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Psychology experiment - IN PROGRESS!</title>
+  <script src="/static/lib/jquery-min.js" type="text/javascript"></script>
+  <script src="/static/lib/underscore-min.js" type="text/javascript"></script>
+  <script src="/static/lib/backbone-min.js" type="text/javascript"></script>
+  <script src="/static/lib/jquery.csv-0.71.min.js"></script>
+  <script src="/static/js/jspsych/jspsych.js" type="text/javascript"></script>
+  <script src="/static/js/jspsych/plugins/jspsych-text.js" type="text/javascript"></script>
+  <script src="/static/js/jspsych/plugins/jspsych-single-stim.js" type="text/javascript"></script>
+  <script src="/static/js/jspsych/plugins/jspsych-survey-likert.js" type="text/javascript"></script>
+  <script src="/static/js/jspsych/plugins/jspsych-call-function.js" type="text/javascript"></script>
+  <script src="/static/js/jspsych/plugins/jspsych-s2stim.js" type="text/javascript"></script>
+  <script src ="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script type="text/javascript">
+    // These fields provided by the psiTurk Server
+    var uniqueId = "{{ uniqueId }}"; // a unique string identifying the worker/task
+    var adServerLoc = "{{ adServerLoc }}"; // the location of your ad (so you can send user back at end of experiment)
+    var mode = "{{ mode }}"; // is this running live, sandbox, or in debug mode?
+  </script>
+
+  <!-- utils.js and psiturk.js provide the basic psiturk functionality -->
+  <script src="/static/js/utils.js" type="text/javascript"></script>
+  <script src="/static/js/psiturk.js" type="text/javascript"></script>
+
+  <link href="/static/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  <link href="/static/css/style.css" rel="stylesheet" type="text/css"></link>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
+</head>
+
+<body>
+  <div id='jspsych-target'></div>
+</body>
+<!-- script src="/static/config.js" type="text/javascript"></script -->
+<script>
+  /* load psiturk */
+  var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
+
+  /* text blocks */
+
+  var instructions_block = {
+    type: "text",
+    text: "<h3>Welcome!</h3><p>In this experiment, you will see photographs of different settings very briefly. {{taskexpl}}</p>"+
+      "<p>For <strong>{{class1}}</strong> scenes, press the letter <strong>"+answers[0]+"</strong> on the keyboard as fast as you can.</p>" +
+      "<p>For <strong>{{class2}}</strong> scenes, press the letter <strong>"+answers[1]+"</strong> on the keyboard as fast as you can.</p>" +
+      "<p>Examples:</p>" +
+      "<div class='left center-content'><img src='/static/examples/class1intro.png'></img>" +
+      "<p class='small'><strong>{{Class1}} scene - press the "+answers[0]+" key</strong></p></div>" +
+      "<div class='right center-content'><img src='/static/examples/class2intro.png'></img>" +
+      "<p class='small'><strong>{{Class2}} scene - press the "+answers[1]+" key</strong></p></div>" +
+      "<p>Press any key to begin.</p>",
+    timing_post_trial: 2000
+  };
+  /* subject info block*/
+  var question = ["I am..."];
+  var scale = ["Left-Handed", "Right-Handed"];
+  var directions = ["<h3>Before we begin...</h3>"+
+    "<p>We need to know if you are <emph>right-handed</emph> or <emph>left-handed</emph>.</p>" +
+      "<p>Please <strong>select</strong> the <strong>appropriate response</strong> below.</p>"+
+      "<p>After that, click the 'Submit Answers' button to continue to the experiment.</p>"];
+
+  var subject_info_block = {
+    type: "survey-likert",
+    questions: [question],
+    labels: [[scale]],
+    intervals: [[2]],
+    preamble: [directions],
+    show_ticks: true
+  }; 
+
+  /* stimulus block */
+
+  var curr_trial_duration = 1000;
+  var last_chunk_id = "";
+
+  var init_trial = function(trial) {
+    last_chunk_id = jsPsych.currentChunkID();
+  }
+
+  var base_test_block = {
+    init_fn: init_trial,
+    type: "s2stim",
+    stimuli: [],
+    choices: answer_keys,
+    timeout_message: "<font size='40'>TOO SLOW!</font><br><img src='/static/images/err.png'>Remember to press <strong>"+answers[0]+"</strong> for {{class1}} and press <strong>"+answers[1]+"</strong> for {{class2}} images.<br><small>(and if you don't know, just guess).</small><br><p>Press any key to continue.</p>",
+    reponse_ends_trial: true,
+    onset_index: 1,
+    answer_show_time: 0,
+    answer_strings: answer_strings,
+    answer_keys: answers,
+    answer_codes: answer_keys,
+    base_html: "<div class='reminderbox'>Press <strong>"+answers[0]+"</strong> for {{class1}} and press <strong>"+answers[1]+"</strong> for {{class2}} images.</div>"
+  };
+
+  var test_blocks = [];
+
+  /* training block */
+  function create_training_block(stimuli=0){
+    var training_block = Object.create(base_test_block);
+    training_block.correct_answers = example_answers;
+    training_block.answer_show_time = 1500;
+    training_block.stimuli = [];
+    for (var i=0; i<example_stims.length; ++i) {
+      if (stimuli === 0){
+        trial = { stimulus: example_stims[i], width: 256, height: 256, onset: example_pretime, duration: example_stim_len[i] + max_training_answer_time, answer_keys: answers, answer_codes: answer_keys};
+      }else{
+        trial = { stimulus: example_stims[i], width: 256, height: 256, onset: stimuli[i].onset, duration: stimuli[i].duration, answer_keys: answers, answer_codes: answer_keys};
+        console.log('trial: ', trial)
+      }
+
+      training_block.stimuli.push(trial);
+    }
+    return training_block
+  }
+  training_block = create_training_block();
+
+  /* debrief block */
+  var training_debrief_block = {
+    type: "text",
+    text: function() {
+      var trials = jsPsych.data.getTrialsFromChunk(last_chunk_id);
+      return "<p><h2>Example trials completed.</h2><p>You've done <strong>" + getPercentCorrect(trials) + "%</strong> correct trials.</p>" +
+        "<p>Presentation time of images in the main experiment, coming up next, is a lot shorter and you won't get feedback on whether or not you were correct. <strong>You should try to answer very fast!</strong> For the first block you will have <strong>"+(presentation_duration + max_answer_times[0])+"ms</strong> to respond. Good luck!</p>" +
+        "<p>Press any key to start the experiment!</p>";
+    }
+  };
+
+  var num_blocks_done = 0;
+
+  if (pretraining == 0){
+    var training_statement = ""
+  }else
+  {
+    var training_statement = "<p><strong>To help you get used to the timing of this next round we will have you first complete a few training trials.</strong></p>"
+  }
+  var block_debrief_block = {
+    type: "text",
+    text: function() {
+      var trials = jsPsych.data.getTrialsFromChunk(last_chunk_id);
+      ++num_blocks_done;
+      return "<p><h2>PAUSE.</h2><p>Block "+num_blocks_done+" of "+num_blocks+" completed.</p>" +
+        "<p>You've done <strong>" + getPercentCorrect(trials) + "%</strong> correct trials.</p>" +
+        "<p>Your average response time was <strong>" +
+        getAverageResponseTime(trials) + "ms</strong>. </p>" +
+        "In the next block you will have <strong>"+ (presentation_duration + max_answer_times[num_blocks_done]) + "ms</strong> to respond.</p>" + training_statement + "<p>Press any key to continue the experiment.</p>";
+    }
+  };
+
+
+
+
+  var overall_debrief_block = {
+    type: "text",
+    text: function() {
+      var trials = jsPsych.data.getTrialsOfType('s2stim');
+      trials = trials.slice(example_stims.length); // remove training trials
+      return "<p>Overall, you've done <strong>" + getPercentCorrect(trials) + "%</strong> correct trials.</p>" +
+        "<p>Your average response time was <strong>" +
+        getAverageResponseTime(trials) + "ms</strong>. Press " +
+        "any key to complete the experiment. <h3>Thank you!</h3></p>";
+    }
+  };
+
+  function getPercentCorrect(trials) {
+    var sum_correct = 0;
+    var sum_trials_answered = 0;
+    for (var i = 0; i < trials.length; i++)
+    {
+      if (trials[i].rt > -1 && trials[i].true_response == trials[i].response) ++sum_correct;
+      //if (trials[i].rt > -1) ++sum_trials_answered;
+      ++sum_trials_answered;
+    }
+    if (sum_trials_answered == 0) sum_trials_answered = 1;
+    return Math.round(sum_correct * 100 / sum_trials_answered);
+  }
+
+  function getAverageResponseTime(trials) {
+    var sum_rt = 0;
+    var valid_trial_count = 0;
+    for (var i = 0; i < trials.length; i++) {
+      if (trials[i].rt > -1) {
+        sum_rt += trials[i].rt;
+        valid_trial_count++;
+      }
+    }
+    if (valid_trial_count == 0) valid_trial_count = 1;
+    return Math.floor(sum_rt / valid_trial_count);
+  }
+
+
+  /* define experiment structure */
+  var experiment_blocks = [];
+
+  function setupExperiment() {
+    experiment_blocks.push(subject_info_block);
+    experiment_blocks.push(instructions_block);
+    if (pretraining == 0){
+      experiment_blocks.push({chunk_type: 'linear', timeline: [training_block, training_debrief_block]});
+    }
+
+    for (var i=0; i<num_blocks; ++i){
+      if (pretraining == 1){
+        console.log('Block ' + String(i) + ': pretraining')
+        var test_chunk = [create_training_block(stimuli=test_blocks[i].stimuli)];
+        test_chunk.push(training_debrief_block);
+        test_chunk.push(test_blocks[i]);
+      }else{
+        var test_chunk = [test_blocks[i]];
+      }
+      if (i == num_blocks-1){
+        test_chunk.push(overall_debrief_block);
+      }
+      else{
+        test_chunk.push(block_debrief_block);
+      }
+      experiment_blocks.push({chunk_type: 'linear', timeline: test_chunk});
+    }
+  }
+
+  /* Load image list */
+  function shuffle(o) { //v1.0
+    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  };
+
+  function read_stimuli_and_shuffle(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status == 0) {
+          var allText = rawFile.responseText;
+          var lines = shuffle($.csv.toObjects(allText));
+          //console.log('length: ' + lines.length);
+          var num_trials = lines.length;
+          //var num_trials = 10;
+
+          // Segment experiment into blocks
+          var i_trial = 0;
+          for (var i_block = 0; i_block < num_blocks; ++i_block) {
+            var all_trial_images = [];
+            var all_correct_answers = [];
+            var i_last_trial = Math.round((i_block+1) * num_trials / num_blocks);
+            test_blocks[i_block] = Object.create(base_test_block);
+            for (; i_trial < i_last_trial; i_trial++) {
+              var trial_pretime = trial_pretimes[Math.floor(Math.random() * trial_pretimes.length)];
+              var stim_fn = '/static/dataset/' + lines[i_trial].img + '/' + trial_pretime + '.webm';
+              trial = { stimulus: stim_fn, width: 256, height: 256, onset: trial_pretime, duration: trial_pretime + presentation_duration + max_answer_times[i_block] };
+              //console.log("trial: " + stim_fn);
+              var correct_answer = imagelist_identifiers.indexOf(lines[i_trial].cat);
+              if (correct_answer == -1) console.log("WARNING: Unknown category " + lines[i_trial].cat + " in line " + i_trial);
+              all_trial_images.push(trial);
+              all_correct_answers.push(correct_answer);
+            };
+            test_blocks[i_block].stimuli = all_trial_images;
+            test_blocks[i_block].correct_answers = all_correct_answers;
+          };
+          //console.log('length: ' + all_trial_images.length);
+          setupExperiment();
+          startExperiment();
+        }
+      }
+    }
+    rawFile.send(null);
+  }
+
+  /* start the experiment */
+  function startExperiment() {
+    jsPsych.init({
+      display_element: $('#jspsych-target'),
+      experiment_structure: experiment_blocks,
+      on_finish: function() {
+        psiturk.saveData({
+          success: function() {
+            psiturk.completeHIT();
+          }
+        });
+      },
+      on_data_update: function(data) {
+        psiturk.recordTrialData(data);
+      }
+    });
+  }
+
+  /* Select a random set */
+  var n_sets = experiment_sets.length;
+  var i_set = Math.floor(Math.random() * n_sets);
+  var set_filename = "/static/set_" + experiment_sets[i_set] + ".csv";
+  /* Load it */
+  read_stimuli_and_shuffle(set_filename);
+</script>
+
+</html>

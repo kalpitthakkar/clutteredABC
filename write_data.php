@@ -2,9 +2,9 @@
 
 // this path should point to your configuration file.
 include('database_config.php');
-
+$table = "cnist_exp_results";
 $data_array = json_decode(file_get_contents('php://input'), true);
-$filepath = "../data/".$data_array['filename'].".csv"; 
+$filepath = "/media/kalpit/Kalpit/cnist_new_data/".$data_array['filename'].".csv"; 
 $data = $data_array['filedata'];
 // write the file to disk
 file_put_contents($filepath, $data);

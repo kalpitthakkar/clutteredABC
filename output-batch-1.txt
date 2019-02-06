@@ -1,0 +1,60 @@
+-----------------------------------------------------
+Subject ID: ncedeya3o040k7d
+Average Response Time: 856 ms
+Number of correct responses: 71 on 150
+Number of incorrect responses: 79 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: tssus3k7uge5qou
+Average Response Time: 1350 ms
+Number of correct responses: 138 on 150
+Number of incorrect responses: 12 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: teq2wa3fmf78hjq
+Average Response Time: 1554 ms
+Number of correct responses: 147 on 150
+Number of incorrect responses: 3 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ys5c5pcqoglv7u3
+Average Response Time: 1589 ms
+Number of correct responses: 137 on 150
+Number of incorrect responses: 13 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: s0q317hfuxu1y45
+Average Response Time: 745 ms
+Number of correct responses: 73 on 150
+Number of incorrect responses: 77 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 6m1df6s98va7zsu
+Average Response Time: 938 ms
+Number of correct responses: 54 on 150
+Number of incorrect responses: 96 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: nepglxpa81z0vz3
+Average Response Time: 1008 ms
+Number of correct responses: 123 on 150
+Number of incorrect responses: 27 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: djp3mg5k99pzvbn
+Average Response Time: 1558 ms
+Number of correct responses: 131 on 150
+Number of incorrect responses: 19 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 40ndvru8em5t0lm
+Average Response Time: 1146 ms
+Number of correct responses: 77 on 150
+Number of incorrect responses: 73 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: gqz64xth0l2mk2r
+Average Response Time: 1286 ms
+Number of correct responses: 139 on 150
+Number of incorrect responses: 11 on 150
+-----------------------------------------------------

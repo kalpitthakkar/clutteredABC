@@ -540,6 +540,8 @@ window.jsPsych = (function() {
     // recursive upward search for timeline variables
     this.findTimelineVariable = function(variable_name){
       var v = this.getTimelineVariableValue(variable_name);
+      console.log("Huh1:" + variable_name);
+      console.log("Huh2:" + v);
       if(typeof v == 'undefined'){
         if(typeof parent_node !== 'undefined'){
           return parent_node.findTimelineVariable(variable_name);

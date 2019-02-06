@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cluttered NIST Experiment</title>
+    <script src="./jspsych-6.0.5/jspsych.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/jquery-min.js"></script>
+    <script src="./jspsych-6.0.5/jquery.csv-0.71.min.js"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-call-function.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-categorize-image.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-categorize-html.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-video.js" type="text/javascript"></script>
+    <script src="./jspsych-6.0.5/plugins/jspsych-external-html.js" type="text/javascript"></script>
+    <link href="./jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript"> 
+        /* create timeline */
+        var timeline = [];
+        var index = 0;
+
+        var csvfile = '';
+        var lperm_id = 0;
+        var fperm_id = 0;
+        var rtime = 0;
+
+        var exp_stimuli = [ [], [], [] ];
+        var perms = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
+
+        var response_types = {
+            'normal': {'yes': 187, 'no': 189},
+            'inverted': {'yes': 189, 'no': 187}
+        };
+        var exp_type = ['normal', 'inverted'];
+        var keys_allowed = [['+', '-'], ['-', '+']];
+
+        var width = "256";
+        var height = "256";
+
+        /* Get the index so as to set up the experiment data accordingly */
+        function getExperimentIndex() {
+            xhr = new XMLHttpRequest();
+            xhr.open('POST','./get_index.php',true);          // File to get the index to set experiment data
+            
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                    var response = JSON.parse(xhr.responseText);
+                    if(response['idx'] > 0 && response['idx'] < 337) {
+                        index = parseInt(response['idx']);
+                    }
+                    else {
+                        window.location.replace("resource_err.html");
+                    }
+                    console.log(index);
+                    getExperimentDataCSV();
+                }
+                else {
+                    console.log("Some problem with response");
+                }
+            }
+            xhr.send();
+        }
+
+        function getExperimentDataCSV() {
+            xhr = new XMLHttpRequest();
+            xhr.open('POST','./get_exp.php',true);
+
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                    var response = JSON.parse(xhr.responseText);
+                    csvfile = response['filepath'];
+                    lperm_id = parseInt(response['level_perm_id']);
+                    fperm_id = parseInt(response['finger_perm_id']);
+                    rtime = parseInt(response['rtime']);
+                    readStimuli();
+                }
+                else {
+                    console.log("Some problem with response");
+                }
+            }
+            xhr.send(JSON.stringify({idx: index}));
+        }
+
+        function readStimuli() {
+            var rawFile = new XMLHttpRequest();
+            //while(csvfile.charAt(0) === '/')
+            //{
+            //    csvfile = csvfile.substr(1);
+            //}
+            csvfile = csvfile.slice(28, csvfile.length);
+            console.log(csvfile);
+            rawFile.open('GET',csvfile,true);
+
+            rawFile.onreadystatechange = function() {
+                if(rawFile.readyState == 4) {
+                    if (rawFile.status == 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        console.log(allText);
+                        var lines = $.csv.toObjects(allText);
+                        //console.log(lines);
+
+                        var block_length = lines.length / 3;
+                        /* Create the experiment blocks */
+                        for(var i = 0; i < 3; i++) {
+                            var stim = [];
+                            for(var j = i*block_length; j < (i+1)*block_length; j++) {
+                                //console.log(lines[j].level);
+                                //console.log(lines[j].sample_gt);
+                                //console.log(lines[j].sample_path);
+                                var valueToPush = { };
+                                var dataPart = { };
+                                dataPart.part = lines[j].level;
+                                dataPart.correct_response = lines[j].sample_gt;
+                                valueToPush.stimulus = '<video width='+width+' height='+height+' autoplay > <source src="./'+
+                                    lines[j].sample_path.slice(28, lines[j].sample_path.length)+'"> </video>'
+                                valueToPush.data = dataPart;
+                                valueToPush.correct_key = response_types[exp_type[fperm_id - 1]][lines[j].sample_gt];
+                                stim.push(valueToPush);
+                            }
+                            exp_stimuli[i] = stim;
+                        }
+                        //console.log(exp_stimuli);
+                        setupExperiment();
+                        startExperiment();
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+
+        function setupExperiment() {
+            /* define welcome message trial */
+            var welcome = {
+                type: "html-keyboard-response",
+                stimulus: "Welcome to the experiment. Press any key to begin.",
+            };
+            timeline.push(welcome);
+
+            var consent = {
+                type: 'external-html',
+                url: 'consent.html',
+                cont_btn: 'agree',
+            };
+            timeline.push(consent);
+
+            var key_yes = keys_allowed[fperm_id-1][0];
+            var key_no = keys_allowed[fperm_id-1][1];
+
+            var train_slow = [
+                { stimulus: './home/kalpit/train/slow/baseline-_imgs_21_sample_1257.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: './home/kalpit/train/slow/baseline-_imgs_29_sample_852.png', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: './home/kalpit/train/slow/ix1-_imgs_40_sample_3432.png', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: './home/kalpit/train/slow/ix1-_imgs_44_sample_981.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: './home/kalpit/train/slow/ix2_imgs_46_sample_3546.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: './home/kalpit/train/slow/ix2_imgs_26_sample_639.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+            ];
+
+            var train_fast = [
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/baseline-_imgs_32_sample_2284/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/baseline-_imgs_39_sample_3593/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/baseline-_imgs_9_sample_125/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/baseline-_imgs_32_sample_794/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/baseline-_imgs_5_sample_1084/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix1-_imgs_22_sample_1122/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix1-_imgs_11_sample_759/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix1-_imgs_14_sample_2358/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix1-_imgs_22_sample_1642/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix1-_imgs_28_sample_1972/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix2_imgs_49_sample_2631/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix2_imgs_42_sample_3533/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix2_imgs_11_sample_338/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix2_imgs_18_sample_2875/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: '<video width=256 height=256 autoplay > <source src="./home/kalpit/train/fast/ix2_imgs_43_sample_1219/1000-'+rtime+'.webm"> </video>', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+            ];
+
+            var preview_images = [
+                { stimulus: './home/kalpit/train/preview/baseline-_imgs_10_sample_495.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+                { stimulus: './home/kalpit/train/preview/ix1-_imgs_42_sample_2149.png', data: { part: 'train', correct_response: 'no'}, correct_key: response_types[exp_type[fperm_id-1]]['no'] },
+                { stimulus: './home/kalpit/train/preview/ix2_imgs_25_sample_3052.png', data: { part: 'train', correct_response: 'yes'}, correct_key: response_types[exp_type[fperm_id-1]]['yes'] },
+            ];
+
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "<p> You will make decisions about a series of images. Each image has two letters and two circles. " +
+                "Your task is to decide whether the two circles are on the <strong>same</strong> or <strong>different</strong> letters.</p>" +
+                "<p>If the circles are on the same letter, press <strong>"+ key_yes +"</strong>. If the circles are on different letters, press <strong>"+ key_no +"</strong>.</p>" +
+                "<p>(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>).</p>" +
+                "<p><strong> Do your best to respond as quickly as possible.</strong></p>" +
+                "<p>The experiment is split into two phases. You will first complete a practice session, consisting of twenty images, in which you will get " +
+                "feedback on your performance. The first 6 images are for understanding the type of task and structures in images. The next 15 are for " +
+                "getting your reaction time under "+ rtime +" ms. Next, you will complete the main experiment, where you will not get any feedback. The main experiment has " +
+                "90 images, split into 3 blocks. You will get a chance to rest between each block. Again, keep your response times under "+ rtime +" ms.</p>" +
+                "<p>In short, be as quick as possible. Press any key to begin.</p>", 
+                post_trial_gap: 2000,
+            };
+            timeline.push(instructions);
+
+            var speed_change_instruction = {
+                type: "html-keyboard-response",
+                stimulus: "<p> This next phase of training will mimic the main experiment. Images will remain on screen only for a short period. </p>" +
+                          "<p> Your task is to correctly recognize each before the period elapses. Press any key to proceed. </p>",
+            };
+
+            var subject_id = jsPsych.randomization.randomID(15);
+            var basename = "experiment_data-";
+            var tstamp = "-" + Date.now().toString();
+            var save_filename = basename.concat(subject_id, tstamp);
+            jsPsych.data.addProperties({
+                SubjectID: save_filename
+            });
+
+            var rest1 = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:30px;"> <p> Practice session is now complete.</p>You will now begin the main experiment. There are 5 phases, each with 30 images. ' +
+                    'You will have a chance to REST between two phases.</p> <p>Press any key to begin the main experiment </p> </div>',
+                data: { part: 'rest' }
+            };
+
+            var rest2 = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:30px;"> <p> Main experiment - phase 1 is now complete. Press any key to begin next split </p> </div>',
+                data: { part: 'rest' }
+            };
+
+            var rest3 = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:30px;"> <p> Main experiment - phase 2 is now complete. Press any key to begin next split </p> </div>',
+                data: { part: 'rest' }
+            };
+
+            var rest4 = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:30px;"> <p> Main experiment - phase 3 is now complete. Press any key to begin next split </p> </div>',
+                data: { part: 'rest' }
+            };
+
+            var slow_block = {
+                type: "categorize-image",
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                choices: [187, 189],
+                data: jsPsych.timelineVariable('data'),
+                key_answer: jsPsych.timelineVariable('correct_key'),
+                correct_text: "<p class='prompt'> Correct response! </p>",
+                incorrect_text: "<p class='prompt'> Incorrect response! </p>",
+                feedback_duration: 1500,
+                prompt: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+            };
+
+            var fast_block = {
+                type: "categorize-html",
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                choices: [187, 189],
+                data: jsPsych.timelineVariable('data'),
+                key_answer: jsPsych.timelineVariable('correct_key'),
+                correct_text: "<p class='prompt'> Correct response! </p>",
+                incorrect_text: "<p class='prompt'> Incorrect response! </p>",
+                stimulus_duration: 1000 + rtime,
+                trial_duration: 1000 + rtime,
+                feedback_duration: 1500,
+                show_stim_with_feedback: false,
+                prompt: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+            };
+
+            var preview_block = {
+                type: "categorize-image",
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                data: jsPsych.timelineVariable('data'),
+                feedback_duration: 0,
+                prompt: "<p> Please notice carefully. The following section will have images similar to this. </p>" +
+                        "<p> Press any key to proceed </p>",
+            };
+
+            var test_block = {
+                type: "categorize-html",
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                choices: [187, 189],
+                data: jsPsych.timelineVariable('data'),
+                key_answer: jsPsych.timelineVariable('key_answer'),
+                correct_text: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+                incorrect_text: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+                stimulus_duration: jsPsych.timelineVariable('stimulus_duration'),
+                trial_duration: jsPsych.timelineVariable('trial_duration'),
+                feedback_duration: 0,
+                prompt: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+            };
+
+            var proto_block = {
+                type: "categorize-html",
+                stimulus: [],
+                choices: [187, 189],
+                data: [],
+                key_answer: [],
+                correct_text: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+                incorrect_text: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+                stimulus_duration: 1000,
+                trial_duration: 1000,
+                feedback_duration: 0,
+                prompt: "<p class='prompt'> Are the two circles on the same letter? Respond ("+key_yes+")yes or ("+key_no+")no: </p>",
+            };
+
+            function createBaseBlock(idx) {
+                var base = [];
+                for(var i = 0; i < exp_stimuli[idx].length; i++) {
+                    var t_block = Object.create(proto_block);
+                    t_block.stimulus = exp_stimuli[idx][i].stimulus;
+                    t_block.data = exp_stimuli[idx][i].data;
+                    t_block.key_answer = exp_stimuli[idx][i].correct_key;
+
+                    t_block.stimulus_duration = proto_block.stimulus_duration + rtime;
+                    t_block.trial_duration = proto_block.trial_duration + rtime;
+                    //console.log(t_block);
+
+                    base[i] = t_block;
+                }
+                //console.log(base);
+                return base;
+            };
+
+            var train_slow = {
+                timeline: [slow_block],
+                timeline_variables: train_slow,
+                randomize_order: false
+            };
+
+            var train_fast = {
+                timeline: [fast_block],
+                timeline_variables: train_fast,
+                randomize_order: false
+            };
+
+            var s1 = perms[lperm_id-1][0];
+            var s2 = perms[lperm_id-1][1];
+            var s3 = perms[lperm_id-1][2];
+            
+            var preview1 = {
+                timeline: [preview_block],
+                timeline_variables: preview_images.slice(s1,s1+1),
+            };
+
+            var preview2 = {
+                timeline: [preview_block],
+                timeline_variables: preview_images.slice(s2,s2+1),
+            };
+
+            var preview3 = {
+                timeline: [preview_block],
+                timeline_variables: preview_images.slice(s3,s3+1),
+            };
+
+            timeline.push(train_slow);
+            timeline.push(speed_change_instruction);
+            timeline.push(train_fast);
+
+            var test_base = {
+                timeline: [test_block],
+                timeline_variables: createBaseBlock(0),
+                randomize_order: true
+            };
+            timeline.push(preview1);
+            timeline.push(test_base);
+            timeline.push(rest2);
+            
+            var test_level1 = {
+                timeline: [test_block],
+                timeline_variables: createBaseBlock(1),
+                randomize_order: true,
+            };
+            timeline.push(preview2);
+            timeline.push(test_level1);
+            timeline.push(rest3);
+
+            var test_level2 = {
+                timeline: [test_block],
+                timeline_variables: createBaseBlock(2),
+                randomize_order: true,
+            };
+            timeline.push(preview3);
+            timeline.push(test_level2);
+            timeline.push(rest4);
+
+            var thanks = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:30px;"> <p> The entire experiment is now complete. Thank you very much for your time. </p>' +
+                        '<p> You will now see a page with your unique code. Make sure to copy it and paste it on your mechanical turk page. </p> </div>',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: 6000,
+                data: { part: 'thanks' },
+                on_finish: function() {
+                    jsPsych.data.addProperties({
+                        exp_idx: index,
+                        csvfile: csvfile,
+                        lid: lperm_id,
+                        fid: fperm_id,
+                        rtime: rtime,
+                    });
+                    jsPsych.data.displayData();
+                    updateExperimentIndex(index, subject_id);
+                    
+                    var raw_data = jsPsych.data.get().values()[0];
+                    console.log(raw_data.workerid);
+                    var workerid = raw_data.workerid;
+                    var assignmentid = raw_data.assignmentid;
+                    var hitid = raw_data.hitid;
+                    var turksub = raw_data.turksubmit;
+                    saveData(save_filename, jsPsych.data.get().csv(), subject_id, workerid, assignmentid, hitid, turksub);
+                    
+                    /* call the saveData function after the experiment is over
+                    var raw_data = jsPsych.data.get().values()[0];
+                    console.log(raw_data.workerid);
+                    var workerid = raw_data.workerid;
+                    var assignmentid = raw_data.assignmentid;
+                    var hitid = raw_data.hitid;
+                    var turksub = raw_data.turksubmit;
+                    // jsPsych.data.get().localSave('csv', save_filename.concat('.csv'));
+                    saveData(save_filename, jsPsych.data.get().csv(), subject_id, workerid, assignmentid, hitid, turksub);
+                    */
+                }
+            };
+
+            timeline.push(thanks);
+
+            var pastecode = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:20px;"> <p> <strong> Your unique code: </strong> ' + subject_id +
+                        '</p> Paste this on the Mechanical Turk page and press Submit to complete the experiment. ' +
+                        'Once you are done submitting, you can safely close this tab. </p> </div>',
+                choices: jsPsych.NO_KEYS,
+                data: { part: 'code' }
+            };
+
+            timeline.push(pastecode);
+
+            /* Insert the new subject ID who completed the experiment to update the overall index */
+            function updateExperimentIndex(index, subject_id) {
+                xhr = new XMLHttpRequest();
+                xhr.open('POST','./update_index.php',true);          // File to get the index to set experiment data
+                
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onload = function() {
+                    if(xhr.status == 200) {
+                        console.log(xhr.responseText);
+                        console.log("Success!")
+                    }
+                    else {
+                        console.log("Some problem with response");
+                    }
+                }
+                xhr.send(JSON.stringify({idx: index, subid: subject_id}));
+            }
+
+            function saveData(name, data, subid, workid, assignid, hitid, turksub) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', './write_data.php'); // 'write_data.php' is the path to the php file described above.
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function() {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText);
+                        console.log("Success!")
+                    }
+                    else {
+                        console.log("There is some error in accessing files");
+                    }
+                };
+                xhr.send(JSON.stringify({filename: name, filedata: data, SubjectID: subid, 
+                    workerId: workid, assignId: assignid, hitId: hitid, turksub: turksub}));
+            }
+        }
+
+        function startExperiment() {
+            /* start the experiment */
+            jsPsych.init({
+                timeline: timeline,
+            });
+        }
+
+        getExperimentIndex();
+    </script>
+  </body>  
+</html>

@@ -1,0 +1,1150 @@
+-----------------------------------------------------
+Subject ID: 9a8u02antep5uku
+Baseline Performance: 
+======================
+Average Response Time: 1710.6 ms
+Number of correct responses: 50 on 50
+Number of incorrect responses: 0 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1967.48 ms
+Number of correct responses: 49 on 50
+Number of incorrect responses: 1 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1709.52 ms
+Number of correct responses: 48 on 50
+Number of incorrect responses: 2 on 50
+Overall Performance: 
+======================
+Average Response Time: 1795.86666667 ms
+Number of correct responses: 147 on 150
+Number of incorrect responses: 3 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ncedeya3o040k7d
+Baseline Performance: 
+======================
+Average Response Time: 612.8 ms
+Number of correct responses: 23 on 50
+Number of incorrect responses: 27 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1287.68 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+ix2 Performance: 
+======================
+Average Response Time: 669.74 ms
+Number of correct responses: 21 on 50
+Number of incorrect responses: 29 on 50
+Overall Performance: 
+======================
+Average Response Time: 856.74 ms
+Number of correct responses: 71 on 150
+Number of incorrect responses: 79 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: kh23fofwgsc8yfj
+Baseline Performance: 
+======================
+Average Response Time: 116.38 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+ix1 Performance: 
+======================
+Average Response Time: 195.6 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+ix2 Performance: 
+======================
+Average Response Time: 206.8 ms
+Number of correct responses: 29 on 50
+Number of incorrect responses: 21 on 50
+Overall Performance: 
+======================
+Average Response Time: 172.926666667 ms
+Number of correct responses: 85 on 150
+Number of incorrect responses: 65 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: xjkuv3n2zu1wp4c
+Baseline Performance: 
+======================
+Average Response Time: 463.6 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix1 Performance: 
+======================
+Average Response Time: 659.56 ms
+Number of correct responses: 18 on 50
+Number of incorrect responses: 32 on 50
+ix2 Performance: 
+======================
+Average Response Time: 704.84 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+Overall Performance: 
+======================
+Average Response Time: 609.333333333 ms
+Number of correct responses: 66 on 150
+Number of incorrect responses: 84 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: fs86zoq87d2nhn6
+Baseline Performance: 
+======================
+Average Response Time: 1132.04 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1249.3 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1111.18 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+Overall Performance: 
+======================
+Average Response Time: 1164.17333333 ms
+Number of correct responses: 135 on 150
+Number of incorrect responses: 15 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: tssus3k7uge5qou
+Baseline Performance: 
+======================
+Average Response Time: 1407.2 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1317.38 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1325.54 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+Overall Performance: 
+======================
+Average Response Time: 1350.04 ms
+Number of correct responses: 138 on 150
+Number of incorrect responses: 12 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ocd7ymwd0vkt0rt
+Baseline Performance: 
+======================
+Average Response Time: 390.5 ms
+Number of correct responses: 18 on 50
+Number of incorrect responses: 32 on 50
+ix1 Performance: 
+======================
+Average Response Time: 435.04 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix2 Performance: 
+======================
+Average Response Time: 428.96 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+Overall Performance: 
+======================
+Average Response Time: 418.166666667 ms
+Number of correct responses: 69 on 150
+Number of incorrect responses: 81 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 0ut5ysuyaenkums
+Baseline Performance: 
+======================
+Average Response Time: 1644.62 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1695.74 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1683.78 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+Overall Performance: 
+======================
+Average Response Time: 1674.71333333 ms
+Number of correct responses: 139 on 150
+Number of incorrect responses: 11 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: teq2wa3fmf78hjq
+Baseline Performance: 
+======================
+Average Response Time: 1453.7 ms
+Number of correct responses: 49 on 50
+Number of incorrect responses: 1 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1726.36 ms
+Number of correct responses: 48 on 50
+Number of incorrect responses: 2 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1482.4 ms
+Number of correct responses: 50 on 50
+Number of incorrect responses: 0 on 50
+Overall Performance: 
+======================
+Average Response Time: 1554.15333333 ms
+Number of correct responses: 147 on 150
+Number of incorrect responses: 3 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: hryoe7z5fj87p8u
+Baseline Performance: 
+======================
+Average Response Time: 857.46 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+ix1 Performance: 
+======================
+Average Response Time: 857.44 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+ix2 Performance: 
+======================
+Average Response Time: 851.26 ms
+Number of correct responses: 39 on 50
+Number of incorrect responses: 11 on 50
+Overall Performance: 
+======================
+Average Response Time: 855.386666667 ms
+Number of correct responses: 119 on 150
+Number of incorrect responses: 31 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 1wwpbe72njjo04m
+Baseline Performance: 
+======================
+Average Response Time: 1502.66 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1558.84 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1338.72 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+Overall Performance: 
+======================
+Average Response Time: 1466.74 ms
+Number of correct responses: 132 on 150
+Number of incorrect responses: 18 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ys5c5pcqoglv7u3
+Baseline Performance: 
+======================
+Average Response Time: 1342.14 ms
+Number of correct responses: 49 on 50
+Number of incorrect responses: 1 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1709.18 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1716.76 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+Overall Performance: 
+======================
+Average Response Time: 1589.36 ms
+Number of correct responses: 137 on 150
+Number of incorrect responses: 13 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 757cyq10rr6pn1c
+Baseline Performance: 
+======================
+Average Response Time: 702.94 ms
+Number of correct responses: 26 on 50
+Number of incorrect responses: 24 on 50
+ix1 Performance: 
+======================
+Average Response Time: 820.76 ms
+Number of correct responses: 23 on 50
+Number of incorrect responses: 27 on 50
+ix2 Performance: 
+======================
+Average Response Time: 594.32 ms
+Number of correct responses: 25 on 50
+Number of incorrect responses: 25 on 50
+Overall Performance: 
+======================
+Average Response Time: 706.006666667 ms
+Number of correct responses: 74 on 150
+Number of incorrect responses: 76 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 1lxxq4x24n4bztq
+Baseline Performance: 
+======================
+Average Response Time: 1697.8 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1587.42 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1859.24 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+Overall Performance: 
+======================
+Average Response Time: 1714.82 ms
+Number of correct responses: 131 on 150
+Number of incorrect responses: 19 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ljltfh33jjpp06g
+Baseline Performance: 
+======================
+Average Response Time: 343.66 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+ix1 Performance: 
+======================
+Average Response Time: 301.0 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+ix2 Performance: 
+======================
+Average Response Time: 339.44 ms
+Number of correct responses: 32 on 50
+Number of incorrect responses: 18 on 50
+Overall Performance: 
+======================
+Average Response Time: 328.033333333 ms
+Number of correct responses: 87 on 150
+Number of incorrect responses: 63 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 874pegabpr0zk5e
+Baseline Performance: 
+======================
+Average Response Time: 624.18 ms
+Number of correct responses: 26 on 50
+Number of incorrect responses: 24 on 50
+ix1 Performance: 
+======================
+Average Response Time: 619.34 ms
+Number of correct responses: 30 on 50
+Number of incorrect responses: 20 on 50
+ix2 Performance: 
+======================
+Average Response Time: 721.3 ms
+Number of correct responses: 21 on 50
+Number of incorrect responses: 29 on 50
+Overall Performance: 
+======================
+Average Response Time: 654.94 ms
+Number of correct responses: 77 on 150
+Number of incorrect responses: 73 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ub36a2dyhj97jms
+Baseline Performance: 
+======================
+Average Response Time: 144.2 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+ix1 Performance: 
+======================
+Average Response Time: 147.92 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+ix2 Performance: 
+======================
+Average Response Time: 182.88 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+Overall Performance: 
+======================
+Average Response Time: 158.333333333 ms
+Number of correct responses: 82 on 150
+Number of incorrect responses: 68 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 0y7euy3lezuhztl
+Baseline Performance: 
+======================
+Average Response Time: 149.86 ms
+Number of correct responses: 30 on 50
+Number of incorrect responses: 20 on 50
+ix1 Performance: 
+======================
+Average Response Time: 213.2 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+ix2 Performance: 
+======================
+Average Response Time: 195.46 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+Overall Performance: 
+======================
+Average Response Time: 186.173333333 ms
+Number of correct responses: 86 on 150
+Number of incorrect responses: 64 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: bj8c45fz5urlcvw
+Baseline Performance: 
+======================
+Average Response Time: 1119.42 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1052.88 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1247.56 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+Overall Performance: 
+======================
+Average Response Time: 1139.95333333 ms
+Number of correct responses: 129 on 150
+Number of incorrect responses: 21 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: vskb7pd7dzzoknv
+Baseline Performance: 
+======================
+Average Response Time: 2163.0 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix1 Performance: 
+======================
+Average Response Time: 2321.1 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix2 Performance: 
+======================
+Average Response Time: 2018.74 ms
+Number of correct responses: 44 on 50
+Number of incorrect responses: 6 on 50
+Overall Performance: 
+======================
+Average Response Time: 2167.61333333 ms
+Number of correct responses: 130 on 150
+Number of incorrect responses: 20 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 0h7w2m5h7e4v3w2
+Baseline Performance: 
+======================
+Average Response Time: 1941.1 ms
+Number of correct responses: 3 on 50
+Number of incorrect responses: 47 on 50
+ix1 Performance: 
+======================
+Average Response Time: 2550.78 ms
+Number of correct responses: 5 on 50
+Number of incorrect responses: 45 on 50
+ix2 Performance: 
+======================
+Average Response Time: 2259.88 ms
+Number of correct responses: 4 on 50
+Number of incorrect responses: 46 on 50
+Overall Performance: 
+======================
+Average Response Time: 2250.58666667 ms
+Number of correct responses: 12 on 150
+Number of incorrect responses: 138 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: s0q317hfuxu1y45
+Baseline Performance: 
+======================
+Average Response Time: 722.08 ms
+Number of correct responses: 26 on 50
+Number of incorrect responses: 24 on 50
+ix1 Performance: 
+======================
+Average Response Time: 752.64 ms
+Number of correct responses: 26 on 50
+Number of incorrect responses: 24 on 50
+ix2 Performance: 
+======================
+Average Response Time: 763.16 ms
+Number of correct responses: 21 on 50
+Number of incorrect responses: 29 on 50
+Overall Performance: 
+======================
+Average Response Time: 745.96 ms
+Number of correct responses: 73 on 150
+Number of incorrect responses: 77 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 5b471qshr60zdhm
+Baseline Performance: 
+======================
+Average Response Time: 1173.74 ms
+Number of correct responses: 35 on 50
+Number of incorrect responses: 15 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1216.44 ms
+Number of correct responses: 31 on 50
+Number of incorrect responses: 19 on 50
+ix2 Performance: 
+======================
+Average Response Time: 998.14 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+Overall Performance: 
+======================
+Average Response Time: 1129.44 ms
+Number of correct responses: 94 on 150
+Number of incorrect responses: 56 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: gp00u0z375g75ow
+Baseline Performance: 
+======================
+Average Response Time: 1373.06 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1325.16 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1407.98 ms
+Number of correct responses: 38 on 50
+Number of incorrect responses: 12 on 50
+Overall Performance: 
+======================
+Average Response Time: 1368.73333333 ms
+Number of correct responses: 123 on 150
+Number of incorrect responses: 27 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: r84oe79s0871yxb
+Baseline Performance: 
+======================
+Average Response Time: 1667.62 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1662.9 ms
+Number of correct responses: 20 on 50
+Number of incorrect responses: 30 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1768.62 ms
+Number of correct responses: 28 on 50
+Number of incorrect responses: 22 on 50
+Overall Performance: 
+======================
+Average Response Time: 1699.71333333 ms
+Number of correct responses: 72 on 150
+Number of incorrect responses: 78 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: u4f97mw5vuwfloa
+Baseline Performance: 
+======================
+Average Response Time: 1622.14 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1622.02 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1516.28 ms
+Number of correct responses: 31 on 50
+Number of incorrect responses: 19 on 50
+Overall Performance: 
+======================
+Average Response Time: 1586.81333333 ms
+Number of correct responses: 82 on 150
+Number of incorrect responses: 68 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 8fuq4jaaqsjczkh
+Baseline Performance: 
+======================
+Average Response Time: 1604.02 ms
+Number of correct responses: 31 on 50
+Number of incorrect responses: 19 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1689.64 ms
+Number of correct responses: 39 on 50
+Number of incorrect responses: 11 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1740.54 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+Overall Performance: 
+======================
+Average Response Time: 1678.06666667 ms
+Number of correct responses: 110 on 150
+Number of incorrect responses: 40 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 6m1df6s98va7zsu
+Baseline Performance: 
+======================
+Average Response Time: 1013.32 ms
+Number of correct responses: 19 on 50
+Number of incorrect responses: 31 on 50
+ix1 Performance: 
+======================
+Average Response Time: 872.42 ms
+Number of correct responses: 17 on 50
+Number of incorrect responses: 33 on 50
+ix2 Performance: 
+======================
+Average Response Time: 930.88 ms
+Number of correct responses: 18 on 50
+Number of incorrect responses: 32 on 50
+Overall Performance: 
+======================
+Average Response Time: 938.873333333 ms
+Number of correct responses: 54 on 150
+Number of incorrect responses: 96 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: srfxnrvfkrgmfgg
+Baseline Performance: 
+======================
+Average Response Time: 1458.16 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1524.42 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1410.46 ms
+Number of correct responses: 44 on 50
+Number of incorrect responses: 6 on 50
+Overall Performance: 
+======================
+Average Response Time: 1464.34666667 ms
+Number of correct responses: 136 on 150
+Number of incorrect responses: 14 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 679cge6rdb9x760
+Baseline Performance: 
+======================
+Average Response Time: 2605.66 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix1 Performance: 
+======================
+Average Response Time: 3562.06 ms
+Number of correct responses: 48 on 50
+Number of incorrect responses: 2 on 50
+ix2 Performance: 
+======================
+Average Response Time: 2466.56 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+Overall Performance: 
+======================
+Average Response Time: 2878.09333333 ms
+Number of correct responses: 142 on 150
+Number of incorrect responses: 8 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: y4zyw7m3v4rr3eu
+Baseline Performance: 
+======================
+Average Response Time: 905.64 ms
+Number of correct responses: 49 on 50
+Number of incorrect responses: 1 on 50
+ix1 Performance: 
+======================
+Average Response Time: 948.86 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix2 Performance: 
+======================
+Average Response Time: 930.92 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+Overall Performance: 
+======================
+Average Response Time: 928.473333333 ms
+Number of correct responses: 138 on 150
+Number of incorrect responses: 12 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 4h17bxzyygdfgt9
+Baseline Performance: 
+======================
+Average Response Time: 2170.26 ms
+Number of correct responses: 48 on 50
+Number of incorrect responses: 2 on 50
+ix1 Performance: 
+======================
+Average Response Time: 2205.54 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 2296.22 ms
+Number of correct responses: 44 on 50
+Number of incorrect responses: 6 on 50
+Overall Performance: 
+======================
+Average Response Time: 2224.00666667 ms
+Number of correct responses: 137 on 150
+Number of incorrect responses: 13 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: symsgt7yvtr47mw
+Baseline Performance: 
+======================
+Average Response Time: 806.1 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix1 Performance: 
+======================
+Average Response Time: 813.04 ms
+Number of correct responses: 49 on 50
+Number of incorrect responses: 1 on 50
+ix2 Performance: 
+======================
+Average Response Time: 863.94 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+Overall Performance: 
+======================
+Average Response Time: 827.693333333 ms
+Number of correct responses: 135 on 150
+Number of incorrect responses: 15 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: ayybw8xbat9o965
+Baseline Performance: 
+======================
+Average Response Time: 2358.22 ms
+Number of correct responses: 22 on 50
+Number of incorrect responses: 28 on 50
+ix1 Performance: 
+======================
+Average Response Time: 2422.22 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix2 Performance: 
+======================
+Average Response Time: 2064.0 ms
+Number of correct responses: 25 on 50
+Number of incorrect responses: 25 on 50
+Overall Performance: 
+======================
+Average Response Time: 2281.48 ms
+Number of correct responses: 71 on 150
+Number of incorrect responses: 79 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 2z78n12pyp8ox6l
+Baseline Performance: 
+======================
+Average Response Time: 1364.26 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1525.66 ms
+Number of correct responses: 44 on 50
+Number of incorrect responses: 6 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1978.72 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+Overall Performance: 
+======================
+Average Response Time: 1622.88 ms
+Number of correct responses: 136 on 150
+Number of incorrect responses: 14 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: tda2agr5xe7fuha
+Baseline Performance: 
+======================
+Average Response Time: 1850.84 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1613.82 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1534.9 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+Overall Performance: 
+======================
+Average Response Time: 1666.52 ms
+Number of correct responses: 128 on 150
+Number of incorrect responses: 22 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: nepglxpa81z0vz3
+Baseline Performance: 
+======================
+Average Response Time: 1057.78 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+ix1 Performance: 
+======================
+Average Response Time: 984.34 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix2 Performance: 
+======================
+Average Response Time: 983.66 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+Overall Performance: 
+======================
+Average Response Time: 1008.59333333 ms
+Number of correct responses: 123 on 150
+Number of incorrect responses: 27 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: v3fevw6n4dz6boc
+Baseline Performance: 
+======================
+Average Response Time: 888.94 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1051.04 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1034.64 ms
+Number of correct responses: 44 on 50
+Number of incorrect responses: 6 on 50
+Overall Performance: 
+======================
+Average Response Time: 991.54 ms
+Number of correct responses: 136 on 150
+Number of incorrect responses: 14 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: tytm89e3hnmmmrl
+Baseline Performance: 
+======================
+Average Response Time: 1090.1 ms
+Number of correct responses: 30 on 50
+Number of incorrect responses: 20 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1017.26 ms
+Number of correct responses: 32 on 50
+Number of incorrect responses: 18 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1123.0 ms
+Number of correct responses: 38 on 50
+Number of incorrect responses: 12 on 50
+Overall Performance: 
+======================
+Average Response Time: 1076.78666667 ms
+Number of correct responses: 100 on 150
+Number of incorrect responses: 50 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: v9cqtx7avc49kmw
+Baseline Performance: 
+======================
+Average Response Time: 1296.3 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1299.0 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1251.56 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+Overall Performance: 
+======================
+Average Response Time: 1282.28666667 ms
+Number of correct responses: 127 on 150
+Number of incorrect responses: 23 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: hmtocgt41w04w1v
+Baseline Performance: 
+======================
+Average Response Time: 1577.72 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1692.36 ms
+Number of correct responses: 38 on 50
+Number of incorrect responses: 12 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1539.56 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+Overall Performance: 
+======================
+Average Response Time: 1603.21333333 ms
+Number of correct responses: 121 on 150
+Number of incorrect responses: 29 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: zgeddyqxns3yrhj
+Baseline Performance: 
+======================
+Average Response Time: 1007.22 ms
+Number of correct responses: 42 on 50
+Number of incorrect responses: 8 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1028.4 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1173.5 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+Overall Performance: 
+======================
+Average Response Time: 1069.70666667 ms
+Number of correct responses: 126 on 150
+Number of incorrect responses: 24 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: q69nlrrmk6xkm0l
+Baseline Performance: 
+======================
+Average Response Time: 360.34 ms
+Number of correct responses: 29 on 50
+Number of incorrect responses: 21 on 50
+ix1 Performance: 
+======================
+Average Response Time: 364.96 ms
+Number of correct responses: 23 on 50
+Number of incorrect responses: 27 on 50
+ix2 Performance: 
+======================
+Average Response Time: 342.76 ms
+Number of correct responses: 23 on 50
+Number of incorrect responses: 27 on 50
+Overall Performance: 
+======================
+Average Response Time: 356.02 ms
+Number of correct responses: 75 on 150
+Number of incorrect responses: 75 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: xjksnqlxqp0zbzj
+Baseline Performance: 
+======================
+Average Response Time: 1127.08 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1390.12 ms
+Number of correct responses: 47 on 50
+Number of incorrect responses: 3 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1170.28 ms
+Number of correct responses: 41 on 50
+Number of incorrect responses: 9 on 50
+Overall Performance: 
+======================
+Average Response Time: 1229.16 ms
+Number of correct responses: 135 on 150
+Number of incorrect responses: 15 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: yscjdfh689mmp8k
+Baseline Performance: 
+======================
+Average Response Time: 882.9 ms
+Number of correct responses: 40 on 50
+Number of incorrect responses: 10 on 50
+ix1 Performance: 
+======================
+Average Response Time: 924.52 ms
+Number of correct responses: 39 on 50
+Number of incorrect responses: 11 on 50
+ix2 Performance: 
+======================
+Average Response Time: 999.24 ms
+Number of correct responses: 32 on 50
+Number of incorrect responses: 18 on 50
+Overall Performance: 
+======================
+Average Response Time: 935.553333333 ms
+Number of correct responses: 111 on 150
+Number of incorrect responses: 39 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: djp3mg5k99pzvbn
+Baseline Performance: 
+======================
+Average Response Time: 1571.8 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1629.82 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1473.04 ms
+Number of correct responses: 43 on 50
+Number of incorrect responses: 7 on 50
+Overall Performance: 
+======================
+Average Response Time: 1558.22 ms
+Number of correct responses: 131 on 150
+Number of incorrect responses: 19 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: f8seck4arunpen8
+Baseline Performance: 
+======================
+Average Response Time: 404.56 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+ix1 Performance: 
+======================
+Average Response Time: 388.42 ms
+Number of correct responses: 23 on 50
+Number of incorrect responses: 27 on 50
+ix2 Performance: 
+======================
+Average Response Time: 307.12 ms
+Number of correct responses: 20 on 50
+Number of incorrect responses: 30 on 50
+Overall Performance: 
+======================
+Average Response Time: 366.7 ms
+Number of correct responses: 70 on 150
+Number of incorrect responses: 80 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: crstgqbfuzww8ul
+Baseline Performance: 
+======================
+Average Response Time: 593.48 ms
+Number of correct responses: 25 on 50
+Number of incorrect responses: 25 on 50
+ix1 Performance: 
+======================
+Average Response Time: 554.3 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix2 Performance: 
+======================
+Average Response Time: 545.34 ms
+Number of correct responses: 31 on 50
+Number of incorrect responses: 19 on 50
+Overall Performance: 
+======================
+Average Response Time: 564.373333333 ms
+Number of correct responses: 80 on 150
+Number of incorrect responses: 70 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: 40ndvru8em5t0lm
+Baseline Performance: 
+======================
+Average Response Time: 590.34 ms
+Number of correct responses: 24 on 50
+Number of incorrect responses: 26 on 50
+ix1 Performance: 
+======================
+Average Response Time: 2358.76 ms
+Number of correct responses: 26 on 50
+Number of incorrect responses: 24 on 50
+ix2 Performance: 
+======================
+Average Response Time: 490.7 ms
+Number of correct responses: 27 on 50
+Number of incorrect responses: 23 on 50
+Overall Performance: 
+======================
+Average Response Time: 1146.6 ms
+Number of correct responses: 77 on 150
+Number of incorrect responses: 73 on 150
+-----------------------------------------------------
+-----------------------------------------------------
+Subject ID: gqz64xth0l2mk2r
+Baseline Performance: 
+======================
+Average Response Time: 1241.68 ms
+Number of correct responses: 48 on 50
+Number of incorrect responses: 2 on 50
+ix1 Performance: 
+======================
+Average Response Time: 1220.18 ms
+Number of correct responses: 45 on 50
+Number of incorrect responses: 5 on 50
+ix2 Performance: 
+======================
+Average Response Time: 1397.66 ms
+Number of correct responses: 46 on 50
+Number of incorrect responses: 4 on 50
+Overall Performance: 
+======================
+Average Response Time: 1286.50666667 ms
+Number of correct responses: 139 on 150
+Number of incorrect responses: 11 on 150
+-----------------------------------------------------
