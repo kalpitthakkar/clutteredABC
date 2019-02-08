@@ -102,8 +102,8 @@ if __name__ == '__main__':
     curs = conn.cursor()
     sub_itr = 0
     complete = False
-    for speed in [800, 1600, 2000]:
-        if sub_itr == 2*args.num_subjects:
+    for speed in [800, 1200, 1600]:
+        if sub_itr == 3*args.num_subjects:
             complete = True
 
         while not complete:
@@ -113,34 +113,43 @@ if __name__ == '__main__':
                     if not os.path.exists(subdir):
                         os.makedirs(subdir)
                     idx1 = lperm[0]; idx2 = lperm[1]; idx3 = lperm[2]
-                    csvfile = os.path.join(splits_dir, 'subject-'+str(sub_itr+1)+'-'+fperm+'-'+str(speed)+'.csv')
-                    with open(csvfile, 'w') as f:
-                        writer = csv.writer(f, delimiter=',')
-                        writer.writerow(['sample_num', 'level', 'sample_path', 'sample_gt'])
-                        for k,x in enumerate(sample_level[idx1][sub_itr]):
-                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
-                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
-                            new_path = os.path.join(subdir, pngdir, '1000-'+str(speed)+'.webm')
-                            writer.writerow([str(k), 'base', new_path, all_sam_to_lab[x]])
-                        for k,x in enumerate(sample_level[idx2][sub_itr]):
-                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
-                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
-                            new_path = os.path.join(subdir, pngdir, '1000-'+str(speed)+'.webm')
-                            writer.writerow([str(k), 'lev1', new_path, all_sam_to_lab[x]])
-                        for k,x in enumerate(sample_level[idx3][sub_itr]):
-                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
-                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
-                            new_path = os.path.join(subdir, pngdir, '1000-'+str(speed)+'.webm')
-                            writer.writerow([str(k), 'lev2', new_path, all_sam_to_lab[x]])
+                    csvfile = os.path.join(splits_dir, 'subject-'+str((sub_itr%args.num_subjects)+1)+'.csv')
                     try:
                         curs.execute("""INSERT INTO cnist_exp_settings VALUES (%s,%s,%s,%s,%s)""", (j+1,i+1,sub_itr+1,csvfile,speed))
                         conn.commit()
                     except:
                         print "Couldn't insert into table"
                         conn.rollback()
+                    try:
+                        curs.execute("""INSERT INTO cnist_exp_runid(subject_id, state) VALUES (%s,%s)""", ('dummyid', 'incomplete'))
+                        conn.commit()
+                    except:
+                        print "Couldn't insert into table"
+                        conn.rollback()
+
+                    if os.path.exists(csvfile):
+                        continue
+                    with open(csvfile, 'w') as f:
+                        writer = csv.writer(f, delimiter=',')
+                        writer.writerow(['sample_num', 'level', 'sample_path', 'sample_gt'])
+                        for k,x in enumerate(sample_level[idx1][sub_itr]):
+                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
+                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
+                            new_path = os.path.join(subdir, pngdir)
+                            writer.writerow([str(k), 'base', new_path, all_sam_to_lab[x]])
+                        for k,x in enumerate(sample_level[idx2][sub_itr]):
+                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
+                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
+                            new_path = os.path.join(subdir, pngdir)
+                            writer.writerow([str(k), 'lev1', new_path, all_sam_to_lab[x]])
+                        for k,x in enumerate(sample_level[idx3][sub_itr]):
+                            copy(x, os.path.join(subdir, '_'.join(x.split('/')[-4:])))
+                            pngdir = '_'.join(x.split('/')[-4:])[:-4]
+                            new_path = os.path.join(subdir, pngdir)
+                            writer.writerow([str(k), 'lev2', new_path, all_sam_to_lab[x]])
 
                     print "S"+str(sub_itr+1)+": Processed permutation ["+str(lperm)+"] (level) with "+fperm+" (finger assignment) with rt "+str(speed)+" ms"
                     sub_itr += 1
-            if sub_itr == args.num_subjects or sub_itr == 2*args.num_subjects:
+            if sub_itr == args.num_subjects or sub_itr == 2*args.num_subjects or sub_itr == 3*args.num_subjects:
                 break
     conn.close()
