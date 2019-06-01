@@ -39,6 +39,7 @@
 
         var width = "256";
         var height = "256";
+        var subject_id = '';
 
         /* Get the index so as to set up the experiment data accordingly */
         function getExperimentIndex() {
@@ -51,12 +52,13 @@
                 if(xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
                     var response = JSON.parse(xhr.responseText);
-                    if(response['idx'] > 0 && response['idx'] < 337) {
+                    if(response['idx'] > 217 && response['idx'] < 325) {
                         index = parseInt(response['idx']);
                     }
                     else {
                         window.location.replace("resource_err.html");
                     }
+                    subject_id = response['subid'];
                     console.log(index);
                     getExperimentDataCSV();
                 }
@@ -92,11 +94,6 @@
 
         function readStimuli() {
             var rawFile = new XMLHttpRequest();
-            //while(csvfile.charAt(0) === '/')
-            //{
-            //    csvfile = csvfile.substr(1);
-            //}
-            csvfile = csvfile.slice(28, csvfile.length);
             console.log(csvfile);
             rawFile.open('GET',csvfile,true);
 
@@ -121,7 +118,7 @@
                                 dataPart.part = lines[j].level;
                                 dataPart.correct_response = lines[j].sample_gt;
                                 valueToPush.stimulus = '<video width='+width+' height='+height+' autoplay > <source src="./'+
-                                    lines[j].sample_path.slice(28, lines[j].sample_path.length)+'"> </video>'
+                                    lines[j].sample_path+'/1000-'+rtime+'.webm"> </video>'
                                 valueToPush.data = dataPart;
                                 valueToPush.correct_key = response_types[exp_type[fperm_id - 1]][lines[j].sample_gt];
                                 stim.push(valueToPush);
@@ -138,6 +135,15 @@
         }
 
         function setupExperiment() {
+
+            // var subject_id = jsPsych.randomization.randomID(15);
+            var basename = "experiment_data-";
+            var tstamp = "-" + Date.now().toString();
+            var save_filename = basename.concat(subject_id, tstamp);
+            jsPsych.data.addProperties({
+                SubjectID: save_filename
+            });
+
             /* define welcome message trial */
             var welcome = {
                 type: "html-keyboard-response",
@@ -195,7 +201,7 @@
                 "<p>If the circles are on the same letter, press <strong>"+ key_yes +"</strong>. If the circles are on different letters, press <strong>"+ key_no +"</strong>.</p>" +
                 "<p>(Do not use the keys on numpad. No need to press SHIFT key for <strong>+</strong>. Just press the keys with <strong>+</strong> and <strong>-</strong>).</p>" +
                 "<p><strong> Do your best to respond as quickly as possible.</strong></p>" +
-                "<p>The experiment is split into two phases. You will first complete a practice session, consisting of twenty images, in which you will get " +
+                "<p>The experiment is split into two phases. You will first complete a practice session, consisting of twenty one images, in which you will get " +
                 "feedback on your performance. The first 6 images are for understanding the type of task and structures in images. The next 15 are for " +
                 "getting your reaction time under "+ rtime +" ms. Next, you will complete the main experiment, where you will not get any feedback. The main experiment has " +
                 "90 images, split into 3 blocks. You will get a chance to rest between each block. Again, keep your response times under "+ rtime +" ms.</p>" +
@@ -209,14 +215,6 @@
                 stimulus: "<p> This next phase of training will mimic the main experiment. Images will remain on screen only for a short period. </p>" +
                           "<p> Your task is to correctly recognize each before the period elapses. Press any key to proceed. </p>",
             };
-
-            var subject_id = jsPsych.randomization.randomID(15);
-            var basename = "experiment_data-";
-            var tstamp = "-" + Date.now().toString();
-            var save_filename = basename.concat(subject_id, tstamp);
-            jsPsych.data.addProperties({
-                SubjectID: save_filename
-            });
 
             var rest1 = {
                 type: 'html-keyboard-response',
@@ -275,7 +273,7 @@
                 stimulus: jsPsych.timelineVariable('stimulus'),
                 data: jsPsych.timelineVariable('data'),
                 feedback_duration: 0,
-                prompt: "<p> Please notice carefully. The following section will have images similar to this. </p>" +
+                prompt: "<p> Please notice carefully. The following section will have images similar to this. You will not get any feedback for your responses in this section, so be quick. </p>" +
                         "<p> Press any key to proceed </p>",
             };
 

@@ -4,7 +4,7 @@ import argparse
 
 from generate_random_splits import generate_random_splits
 
-def prepare_sample_label_map(args, split):
+def prepare_sample_label_map(args, split, limit=200):
     basedir = args.data
     split_name = args.splits[split]
     metadir = os.path.join(basedir, split_name, 'metadata')
@@ -13,7 +13,7 @@ def prepare_sample_label_map(args, split):
         metadata = np.load(f)
 
     dict_map = {}
-    for entry in metadata:
+    for entry in metadata[:limit]:
         path = os.path.join(basedir, split_name, entry[0], entry[2])
         dict_map[path] = ('yes' if entry[4] == '1' else 'no')
 

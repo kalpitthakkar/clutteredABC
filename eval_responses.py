@@ -5,11 +5,12 @@ import pandas as pd
 from glob import glob
 from tqdm import tqdm
 from matplotlib import pyplot as plt
+plt.rcParams.update({'font.size': 11})
 import seaborn as sns
 
 
-MAIN_PATH = '/media/kalpit/Kalpit/'
-#MAIN_PATH = '/media/data_cifs/Kalpit/'
+#MAIN_PATH = '/media/kalpit/Kalpit/'
+MAIN_PATH = '/media/data_cifs/Kalpit/'
 EXT = '.csv'
 
 
@@ -33,11 +34,11 @@ def process_data(path, conditions, file_ext, exp, max_time=5000, rt_control=1600
 
         # 2. Filter for response data
         df = df[np.logical_and(
-            np.logical_or(
-                df['part'].str.contains(r'base'),
-                df['part'].str.contains(r'lev\d'),
-                #df['part'].str.contains(r'split\d'),
-            ),
+            #np.logical_or(
+             #   df['part'].str.contains(r'base'),
+              #  df['part'].str.contains(r'lev\d'),
+                df['part'].str.contains(r'split\d'),
+            #),
             pd.notna(df['part']))]
 
         # 3. Add new column with the button masher score
@@ -46,8 +47,8 @@ def process_data(path, conditions, file_ext, exp, max_time=5000, rt_control=1600
         # 4. Add dataset as a column
         dataset = []
         for idx in range(len(df)):
-            tmp = df['stimulus'].iloc[idx].split('/')[-3]
-            #tmp = df['stimulus'].iloc[idx].split('/')[-1]
+            #tmp = df['stimulus'].iloc[idx].split('/')[-3]
+            tmp = df['stimulus'].iloc[idx].split('/')[-1]
             if exp is 'CNIST':
                 tmp = tmp.split('-')[0]
                 _tmp = tmp.split('_')
@@ -64,10 +65,11 @@ def process_data(path, conditions, file_ext, exp, max_time=5000, rt_control=1600
         df = df[np.logical_and(df['rt'] < max_time, pd.notna(df['rt']))]
 
         # 6. Select the responses with the constrained RT (=800/1600)
-        df = df[df['rtime'] == rt_control]
+        #df = df[df['rtime'] == rt_control]
 
         # 7. Cast correct to float
         df['correct'] = df['correct'].astype(np.float32)
+        df = df[df['correct'] == 1.0]
 
         dfs += [df]
     dfs = pd.concat(dfs, sort=True)
@@ -95,7 +97,7 @@ def plot_results(
         ylims=None):
     """Plot the data with the given key as the DV using seaborn."""
     f = plt.figure()
-    sns.set()
+    sns.set(font_scale=0.5)
     sns.pointplot(data=data, x=iv, y=dv, order=order)
     if title is not None:
         plt.title(title)
@@ -136,8 +138,8 @@ def main(
         SDS=3):
     """Wrapper to run analyses."""
     df = process_data(
-        path=MAIN_PATH,
-        #path=os.path.join(MAIN_PATH, EXP.keys()[0]),
+        #path=MAIN_PATH,
+        path=os.path.join(MAIN_PATH, EXP.keys()[0]),
         conditions=CONDITIONS,
         file_ext=EXT,
         exp=EXP.keys()[0])
@@ -188,7 +190,10 @@ def main(
                 l2acc.append(tnum * 1.0 / (tnum + fnum))
             acc.append(tnum * 1.0 / (tnum + fnum))
             allacc.append(tall * 1.0 / (tall + fall))
-            avgrt.append(df_sel['rt'].mean())
+            if not np.isnan(df_dat['rt'].mean()):
+                avgrt.append(df_dat['rt'].mean())
+            else:
+                avgrt.append(avgrt[-1])
             dats.append(d)
 
     # 9. Concatenate the df
@@ -210,14 +215,14 @@ def main(
     #print int_base, int_l1, int_l2
 
     # Plot RT and accuracy
-    #plot_results(
-    #    out_path='%s_rt' % EXP,
-    #    data=fdf,
-    #    dv='rt',
-    #    title=EXP.keys()[0],
-    #    order=EXP.values()[0],
+    plot_results(
+        out_path='%s_rt' % EXP,
+        data=fdf,
+        dv='rt',
+        title=EXP.keys()[0],
+        order=EXP.values()[0],
         #ylims=[1900, 2100]
-    #)
+    )
     plot_results(
         out_path='%s_acc' % EXP,
         data=fdf,
@@ -227,13 +232,29 @@ def main(
         ylims=[0, 1]
     )
 
-    #ys = bacc
-    #xs = fdf['correct'].index
-    #print ys
-    #plt.hist(ys)
-    #plt.xlabel('Performance')
-    #plt.ylabel('Number of Subjects')
-    #plt.show()
+    fig = plt.figure(figsize=(12, 20))
+    ax1 = fig.add_subplot(1,3,1)
+    xs = fdf[fdf['dataset'].str.contains(dataset[0])]['rt']
+    ax1.hist(np.unique(xs), len(np.unique(xs)) // 2)
+    ax1.set_xlabel('Response Time')
+    ax1.set_ylabel('Number of Subjects')
+    ax1.set_title(dataset[0])
+
+    ax2 = fig.add_subplot(1,3,2)
+    xs = fdf[fdf['dataset'].str.contains(dataset[1])]['rt']
+    ax2.hist(np.unique(xs), len(np.unique(xs)) // 2)
+    ax2.set_xlabel('Response Time')
+    ax2.set_ylabel('Number of Subjects')
+    ax2.set_title(dataset[1])
+
+    ax3 = fig.add_subplot(1,3,3)
+    xs = fdf[fdf['dataset'].str.contains(dataset[2])]['rt']
+    ax3.hist(np.unique(xs), len(np.unique(xs)) // 2)
+    ax3.set_xlabel('Response Time')
+    ax3.set_ylabel('Number of Subjects')
+    ax3.set_title(dataset[2])
+    plt.show()
+    plt.close(fig)
 
     # Save processed data to CSVs
     df.to_csv('%s_raw_data.csv' % EXP.keys()[0])
@@ -247,11 +268,10 @@ if __name__ == '__main__':
     DIAGNOSTICS = [
         {'rt': "Histogram of participants' responses."},
         {'masher': 'How often did ps repeat the same buttonpress?'},
-        {'correct': 'Distribution of accuracies across subjects'}
     ]
-    CONDITIONS = ['cnist_new_data']
+    #CONDITIONS = ['cnist_new_data']
     #CONDITIONS = ['pfind-new-data']
-    #CONDITIONS = ['data_right', 'data_left']
+    CONDITIONS = ['data_right', 'data_left']
     exp = 'CNIST'  # 'PFINDER' or 'CNIST'
     if exp == 'PFINDER':
         EXP = {

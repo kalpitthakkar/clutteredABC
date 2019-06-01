@@ -18,12 +18,21 @@ try {
         }
     }
 
+    $charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    $str = '';
+    $length = strlen($charset);
+    $count = 15;
+    while ($count--) {
+        $str .= $charset[random_int(0, $length-1)];
+    }
+
     if(count($rows) > 0) {
         $idx = $rows[0]['idx'];
-        $sql = "UPDATE `$table` SET state='in_progress' where idx=$idx";
+        $sql = "UPDATE `$table` SET state='in_progress',subject_id='$str' where idx=$idx";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
+        $rows[0]['subid'] = $str;
         echo json_encode($rows[0]);
     }
     else {

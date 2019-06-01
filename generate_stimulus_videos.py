@@ -2,7 +2,7 @@
 # Generate the stimulus videos for all images of the current rapid categorization experiment
 
 import os
-import config
+# import config
 import subprocess
 import shutil
 
@@ -59,20 +59,18 @@ if __name__ == '__main__':
     after_time_ms = 0
 
     import glob
-    #input_image_paths = sorted(glob.glob('/opt/lampp/cnist-experiment/home/kalpit/cnist-new/vids/*'))
+    input_image_paths = sorted(glob.glob('/opt/lampp/cnist-experiment/home/kalpit/cnist-try/vids/*'))
     #input_image_paths = ['/opt/lampp/cnist-experiment/home/kalpit/train/fast']
     #input_image_paths = sorted(glob.glob('/opt/lampp/pathfinder-experiment/home/kalpit/pfind-new/vids/*'))
-    input_image_paths = ['/opt/lampp/pathfinder-experiment/home/kalpit/train/fast']
+    #input_image_paths = ['/opt/lampp/pathfinder-experiment/home/kalpit/train/fast']
 
-    #output_paths = sorted(glob.glob('/opt/lampp/cnist-experiment/home/kalpit/cnist-new/vids/*'))
+    output_paths = sorted(glob.glob('/opt/lampp/cnist-experiment/home/kalpit/cnist-try/vids/*'))
     #output_paths = ['/opt/lampp/cnist-experiment/home/kalpit/train/fast']
     #output_paths = sorted(glob.glob('/opt/lampp/pathfinder-experiment/home/kalpit/pfind-new/vids/*'))
-    output_paths = ['/opt/lampp/pathfinder-experiment/home/kalpit/train/fast']
+    #output_paths = ['/opt/lampp/pathfinder-experiment/home/kalpit/train/fast']
 
-    #[generate_stimulus_videos(
-    #    p, o, onset_times_ms, after_time_ms, stim_show_time_ms=800)  # MAKE SURE STIM_SHOW_TIME = SETTINGS.PY
-    #    for p, o in zip(input_image_paths, output_paths)]
-
-    [generate_stimulus_videos(
-        p, o, onset_times_ms, after_time_ms, stim_show_time_ms=1200)  # MAKE SURE STIM_SHOW_TIME = SETTINGS.PY
-        for p, o in zip(input_image_paths, output_paths)]
+    stim_show_times = [800, 1200, 1600]
+    for stm in stim_show_times:
+        [generate_stimulus_videos(
+            p, o, onset_times_ms, after_time_ms, stim_show_time_ms=stm)  # MAKE SURE STIM_SHOW_TIME = SETTINGS.PY
+            for p, o in zip(input_image_paths, output_paths)]
